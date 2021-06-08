@@ -1,0 +1,15 @@
+D:\School\Luận Văn\Project\Project_Dissertation\Entity\bin\Debug\net5.0\Entity.deps.json
+D:\School\Luận Văn\Project\Project_Dissertation\Entity\bin\Debug\net5.0\Entity.dll
+D:\School\Luận Văn\Project\Project_Dissertation\Entity\bin\Debug\net5.0\ref\Entity.dll
+D:\School\Luận Văn\Project\Project_Dissertation\Entity\bin\Debug\net5.0\Entity.pdb
+D:\School\Luận Văn\Project\Project_Dissertation\Entity\obj\Debug\net5.0\Entity.csproj.AssemblyReference.cache
+D:\School\Luận Văn\Project\Project_Dissertation\Entity\obj\Debug\net5.0\Entity.GeneratedMSBuildEditorConfig.editorconfig
+D:\School\Luận Văn\Project\Project_Dissertation\Entity\obj\Debug\net5.0\Entity.AssemblyInfoInputs.cache
+D:\School\Luận Văn\Project\Project_Dissertation\Entity\obj\Debug\net5.0\Entity.AssemblyInfo.cs
+D:\School\Luận Văn\Project\Project_Dissertation\Entity\obj\Debug\net5.0\Entity.csproj.CoreCompileInputs.cache
+D:\School\Luận Văn\Project\Project_Dissertation\Entity\obj\Debug\net5.0\Entity.dll
+D:\School\Luận Văn\Project\Project_Dissertation\Entity\obj\Debug\net5.0\ref\Entity.dll
+D:\School\Luận Văn\Project\Project_Dissertation\Entity\obj\Debug\net5.0\Entity.pdb
+D:\School\Luận Văn\Project\Project_Dissertation\Entity\bin\Debug\net5.0\Utility.dll
+D:\School\Luận Văn\Project\Project_Dissertation\Entity\bin\Debug\net5.0\Utility.pdb
+D:\School\Luận Văn\Project\Project_Dissertation\Entity\obj\Debug\net5.0\Entity.csproj.CopyComplete

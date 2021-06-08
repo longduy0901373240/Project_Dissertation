@@ -1,0 +1,15 @@
+D:\School\Luận Văn\Project\Project_Dissertation\DataLayer\bin\Debug\net5.0\DataLayer.deps.json
+D:\School\Luận Văn\Project\Project_Dissertation\DataLayer\bin\Debug\net5.0\DataLayer.dll
+D:\School\Luận Văn\Project\Project_Dissertation\DataLayer\bin\Debug\net5.0\ref\DataLayer.dll
+D:\School\Luận Văn\Project\Project_Dissertation\DataLayer\bin\Debug\net5.0\DataLayer.pdb
+D:\School\Luận Văn\Project\Project_Dissertation\DataLayer\obj\Debug\net5.0\DataLayer.csproj.AssemblyReference.cache
+D:\School\Luận Văn\Project\Project_Dissertation\DataLayer\obj\Debug\net5.0\DataLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\School\Luận Văn\Project\Project_Dissertation\DataLayer\obj\Debug\net5.0\DataLayer.AssemblyInfoInputs.cache
+D:\School\Luận Văn\Project\Project_Dissertation\DataLayer\obj\Debug\net5.0\DataLayer.AssemblyInfo.cs
+D:\School\Luận Văn\Project\Project_Dissertation\DataLayer\obj\Debug\net5.0\DataLayer.csproj.CoreCompileInputs.cache
+D:\School\Luận Văn\Project\Project_Dissertation\DataLayer\obj\Debug\net5.0\DataLayer.dll
+D:\School\Luận Văn\Project\Project_Dissertation\DataLayer\obj\Debug\net5.0\ref\DataLayer.dll
+D:\School\Luận Văn\Project\Project_Dissertation\DataLayer\obj\Debug\net5.0\DataLayer.pdb
+D:\School\Luận Văn\Project\Project_Dissertation\DataLayer\bin\Debug\net5.0\Utility.dll
+D:\School\Luận Văn\Project\Project_Dissertation\DataLayer\bin\Debug\net5.0\Utility.pdb
+D:\School\Luận Văn\Project\Project_Dissertation\DataLayer\obj\Debug\net5.0\DataLayer.csproj.CopyComplete
