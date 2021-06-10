@@ -38,6 +38,7 @@
           "DevExpress.Blazor": "20.2.4",
           "Entity": "1.0.0",
           "Microsoft.AspNetCore": "2.2.0",
+          "Microsoft.AspNetCore.WebUtilities": "2.2.0",
           "Utility": "1.0.0",
           "Microsoft.AspNetCore.Antiforgery": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions.Reference": "5.0.0.0",

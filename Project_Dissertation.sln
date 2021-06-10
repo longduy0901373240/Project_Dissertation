@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web_App_Medical", "Web_App_Medical\Web_App_Medical.csproj", "{19592371-29C4-47FC-BB52-CF649DD8F700}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web_App_Medical", "Web_App_Medical\Web_App_Medical.csproj", "{19592371-29C4-47FC-BB52-CF649DD8F700}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entity", "Entity\Entity.csproj", "{D20D4066-0C97-4AC9-853D-24758D7CC7E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entity", "Entity\Entity.csproj", "{D20D4066-0C97-4AC9-853D-24758D7CC7E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controller", "Controller\Controller.csproj", "{DE6EF66A-B8B1-4607-819C-02CE4AAB76DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Controller", "Controller\Controller.csproj", "{DE6EF66A-B8B1-4607-819C-02CE4AAB76DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\DataLayer.csproj", "{33E6980F-7230-4F52-9EAC-1084320AA0E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer\DataLayer.csproj", "{33E6980F-7230-4F52-9EAC-1084320AA0E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Utility\Utility.csproj", "{12F853D8-3E51-42D1-8994-70C1FD6F68BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utility", "Utility\Utility.csproj", "{12F853D8-3E51-42D1-8994-70C1FD6F68BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

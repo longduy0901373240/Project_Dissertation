@@ -1,4 +1,4 @@
-using Luan_Van_Data;
+using Controller.DM_AD;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -28,6 +28,13 @@ namespace Web_App_Medical
             services.AddDevExpressBlazor();
 
             services.AddSingleton<CAD_Benh_Vien_Controller>();
+            services.AddSingleton<CAD_Khoa_Kham_Controller>();
+            services.AddSingleton<CAD_Quan_Controller>();
+            services.AddSingleton<CAD_Dia_Chi_Benh_Vien_Controller>();
+            services.AddSingleton<CAD_Khoa_Kham_Benh_Vien_Controller>();
+            services.AddSingleton<CAD_Dia_Chi_Controller>();
+
+            services.AddHttpContextAccessor();
 
             services.AddSingleton(CConfig.g_strLuan_Van_Data_Conn_String = Configuration.GetConnectionString("Luan_Van_Data_Conn_String").ToString());
         }

@@ -6,8 +6,9 @@ using System.Data;
 using System.Data.SqlClient;
 using Utility;
 using DataLayer;
+using Entity.DM_AD;
 
-namespace Luan_Van_Data
+namespace Controller.DM_AD
 {
 	public class CAD_Benh_Vien_Controller
 	{

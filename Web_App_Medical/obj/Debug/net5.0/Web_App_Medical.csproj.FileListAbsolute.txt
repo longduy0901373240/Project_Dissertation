@@ -56,8 +56,6 @@ D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net
 D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\ref\Web_App_Medical.dll
 D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\Web_App_Medical.pdb
 D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\Web_App_Medical.genruntimeconfig.cache
-D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\RazorDeclaration\Pages\DM_AD\CAD_Thong_Tin_Benh_Vien.razor.g.cs
-D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\Razor\Pages\DM_AD\CAD_Thong_Tin_Benh_Vien.razor.g.cs
 D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\bin\Debug\net5.0\Microsoft.AspNetCore.Server.Kestrel.Https.dll
 D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\bin\Debug\net5.0\Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.dll
 D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\bin\Debug\net5.0\EPPlus.dll
@@ -85,3 +83,9 @@ D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\bin\Debug\net
 D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\bin\Debug\net5.0\DataLayer.pdb
 D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\bin\Debug\net5.0\Entity.pdb
 D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\bin\Debug\net5.0\Utility.pdb
+D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\RazorDeclaration\Pages\DM_AD\R_CAD_Benh_Vien.razor.g.cs
+D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\RazorDeclaration\Pages\DM_AD\R_CAD_Khoa_Kham.razor.g.cs
+D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\Razor\Pages\DM_AD\R_CAD_Benh_Vien.razor.g.cs
+D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\Razor\Pages\DM_AD\R_CAD_Khoa_Kham.razor.g.cs
+D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\RazorDeclaration\Pages\DM_AD\R_CAD_Quan.razor.g.cs
+D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\Razor\Pages\DM_AD\R_CAD_Quan.razor.g.cs

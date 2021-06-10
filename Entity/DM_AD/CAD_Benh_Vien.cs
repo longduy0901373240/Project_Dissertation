@@ -5,13 +5,13 @@ using System.Linq;
 using System.Data;
 using Utility;
 
-namespace Luan_Van_Data
+namespace Entity.DM_AD
 {
 	public class CAD_Benh_Vien
 	{
 		private int m_intAuto_ID;
 		private string m_strTen_Benh_Vien;
-		private string m_strChuyen_Khoa;
+		private int m_intChuyen_Khoa;
 		private string m_strSDT;
 		private string m_strEmail;
 		private int m_intdeleted;
@@ -29,7 +29,7 @@ namespace Luan_Van_Data
 		{
 			m_intAuto_ID = CConst.INT_VALUE_NULL;
 			m_strTen_Benh_Vien = CConst.STR_VALUE_NULL;
-			m_strChuyen_Khoa = CConst.STR_VALUE_NULL;
+			m_intChuyen_Khoa = CConst.INT_VALUE_NULL;
 			m_strSDT = CConst.STR_VALUE_NULL;
 			m_strEmail = CConst.STR_VALUE_NULL;
 			m_intdeleted = CConst.INT_VALUE_NULL;
@@ -63,15 +63,15 @@ namespace Luan_Van_Data
 			}
 		}
 
-		public string Chuyen_Khoa
+		public int Chuyen_Khoa
 		{
 			get
 			{
-				return m_strChuyen_Khoa;
+				return m_intChuyen_Khoa;
 			}
 			set
 			{
-				m_strChuyen_Khoa = value.Trim();
+				m_intChuyen_Khoa = value;
 			}
 		}
 

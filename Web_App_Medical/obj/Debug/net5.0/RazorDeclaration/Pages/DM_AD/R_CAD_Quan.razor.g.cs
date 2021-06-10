@@ -89,14 +89,38 @@ using DevExpress.Blazor;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/benh_vien/thong_tin_benh_vien")]
-    public partial class CAD_Thong_Tin_Benh_Vien : Microsoft.AspNetCore.Components.ComponentBase
+#nullable restore
+#line 13 "D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\_Imports.razor"
+using Microsoft.AspNetCore.Hosting;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 3 "D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\Pages\DM_AD\R_CAD_Quan.razor"
+using Controller.DM_AD;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\Pages\DM_AD\R_CAD_Quan.razor"
+using Entity.DM_AD;
+
+#line default
+#line hidden
+#nullable disable
+    [Microsoft.AspNetCore.Components.RouteAttribute("/danh_muc_ad/quan")]
+    public partial class R_CAD_Quan : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
         {
         }
         #pragma warning restore 1998
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IWebHostEnvironment env { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime IJS { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Quan_Controller _db_Quan { get; set; }
     }
 }
 #pragma warning restore 1591

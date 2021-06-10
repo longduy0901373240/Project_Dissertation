@@ -6989,6 +6989,7 @@
       "DevExpress.Blazor >= 20.2.4",
       "Entity >= 1.0.0",
       "Microsoft.AspNetCore >= 2.2.0",
+      "Microsoft.AspNetCore.WebUtilities >= 2.2.0",
       "Utility >= 1.0.0"
     ]
   },
@@ -7055,6 +7056,10 @@
             "version": "[20.2.4, )"
           },
           "Microsoft.AspNetCore": {
+            "target": "Package",
+            "version": "[2.2.0, )"
+          },
+          "Microsoft.AspNetCore.WebUtilities": {
             "target": "Package",
             "version": "[2.2.0, )"
           }
