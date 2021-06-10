@@ -113,5 +113,37 @@ namespace Controller.DM_AD
 				throw ex;
 			}
 		}
+
+        #region Custom
+		public IList<CAD_Khoa_Kham_Benh_Vien> F5_1_List_AD_Khoa_Kham_Benh_Vien_By_Benh_Vien_ID(int p_intBenh_Vien_ID)
+        {
+			IList<CAD_Khoa_Kham_Benh_Vien> v_arrRes = new List<CAD_Khoa_Kham_Benh_Vien>();
+			DataTable v_dt = new DataTable();
+
+			try
+			{
+				CSqlHelper.FillDataTable(CConfig.g_strLuan_Van_Data_Conn_String, v_dt, "F5_1_sp_sel_List_AD_Khoa_Kham_Benh_Vien_By_Benh_Vien_ID",
+					p_intBenh_Vien_ID);
+
+				foreach (DataRow v_row in v_dt.Rows)
+				{
+					CAD_Khoa_Kham_Benh_Vien v_objRes = CUtility.Map<CAD_Khoa_Kham_Benh_Vien>(v_row);
+					v_arrRes.Add(v_objRes);
+				}
+			}
+
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+
+			finally
+			{
+				v_dt.Dispose();
+			}
+
+			return v_arrRes;
+		}
+		#endregion
 	}
 }

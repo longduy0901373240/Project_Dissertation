@@ -113,5 +113,50 @@ namespace Controller.DM_AD
 				throw ex;
 			}
 		}
+
+		#region Custom
+		public IList<CAD_Dia_Chi_Benh_Vien> F3_1_List_AD_Dia_Chi_Benh_Vien_By_Benh_Vien_ID(int p_intBenh_Vien_ID)
+		{
+			IList<CAD_Dia_Chi_Benh_Vien> v_arrRes = new List<CAD_Dia_Chi_Benh_Vien>();
+			DataTable v_dt = new DataTable();
+
+			try
+			{
+				CSqlHelper.FillDataTable(CConfig.g_strLuan_Van_Data_Conn_String, v_dt, "F3_1_sp_sel_List_AD_Dia_Chi_Benh_Vien_By_Benh_Vien_ID",
+					p_intBenh_Vien_ID);
+
+				foreach (DataRow v_row in v_dt.Rows)
+				{
+					CAD_Dia_Chi_Benh_Vien v_objRes = CUtility.Map<CAD_Dia_Chi_Benh_Vien>(v_row);
+					v_arrRes.Add(v_objRes);
+				}
+			}
+
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+
+			finally
+			{
+				v_dt.Dispose();
+			}
+
+			return v_arrRes;
+		}
+
+		public void F3_2_Delete_AD_Dia_Chi_Benh_Vien_By_Dia_Chi_ID(int p_iDia_Chi_ID, string p_strLast_Updated_By)
+        {
+			try
+			{
+				CSqlHelper.ExecuteNonquery(CConfig.g_strLuan_Van_Data_Conn_String, "F3_2_sp_del_AD_Dia_Chi_Benh_Vien_By_Dia_Chi_ID", p_iDia_Chi_ID, p_strLast_Updated_By);
+			}
+
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
+		#endregion
 	}
 }
