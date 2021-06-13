@@ -1,0 +1,37 @@
+﻿@page "/dashboard/map"
+
+@using Controller.DM_AD
+
+@inject CAD_Dia_Chi_Controller _db_Dia_Chi
+
+@inject IJSRuntime IJS
+
+<div class="row">
+    <div class="col-md-12">
+        <DxFormLayout>
+            <DxFormLayoutItem Caption="Vị trí bản thân" Context="FormLayoutContext" ColSpanMd="6">
+                <Template>
+                    <input id="Search_Address_User" class="form-control form-control-sm dxbs-form-control text-truncate" autocomplete="on" @bind-value="@p_strAddress_User"/>
+                </Template>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Context="FormLayoutContext" ColSpanMd="6">
+                <Template>
+                    <DxButton Click="@Submit" Text="Submit"/>
+                </Template>
+            </DxFormLayoutItem>
+        </DxFormLayout>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <p>@p_strAddress_User</p>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <div id="map"></div>
+    </div>
+</div>
+

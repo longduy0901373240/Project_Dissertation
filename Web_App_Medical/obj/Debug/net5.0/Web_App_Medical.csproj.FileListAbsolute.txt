@@ -91,3 +91,5 @@ D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net
 D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\Razor\Pages\DM_AD\R_CAD_Quan.razor.g.cs
 D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\RazorDeclaration\Pages\DM_AD\R_CAD_Thong_Tin_Chi_Tiet_Benh_Vien.razor.g.cs
 D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\Razor\Pages\DM_AD\R_CAD_Thong_Tin_Chi_Tiet_Benh_Vien.razor.g.cs
+D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\RazorDeclaration\Pages\Dashboard\R_Map.razor.g.cs
+D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\Razor\Pages\Dashboard\R_Map.razor.g.cs
