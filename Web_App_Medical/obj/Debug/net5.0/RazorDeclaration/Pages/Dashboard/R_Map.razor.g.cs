@@ -112,6 +112,7 @@ using Controller.DM_AD;
         }
         #pragma warning restore 1998
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime IJS { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Dia_Chi_Benh_Vien_Controller _db_Dia_Chi_Benh_Vien { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Dia_Chi_Controller _db_Dia_Chi { get; set; }
     }
 }

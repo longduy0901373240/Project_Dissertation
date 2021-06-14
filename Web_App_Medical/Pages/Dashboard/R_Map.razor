@@ -3,9 +3,23 @@
 @using Controller.DM_AD
 
 @inject CAD_Dia_Chi_Controller _db_Dia_Chi
+@inject CAD_Dia_Chi_Benh_Vien_Controller _db_Dia_Chi_Benh_Vien
 
 @inject IJSRuntime IJS
 
+<div class="row">
+    <div class="col-md-12">
+        <DxFormLayout>
+            <DxFormLayoutItem Caption="Trạm y tế" Context="FormLayoutContext" ColSpanMd="6">
+                <Template>
+                    <DxCheckBox Checked="@p_blCheck_Box_Benh_Vien" CheckedChanged="@((bool item) => EvenCheckBox_Benh_Vien(item) )"/>
+                </Template>
+            </DxFormLayoutItem>
+
+        </DxFormLayout>
+    </div>
+</div>
+<br />
 <div class="row">
     <div class="col-md-12">
         <DxFormLayout>
