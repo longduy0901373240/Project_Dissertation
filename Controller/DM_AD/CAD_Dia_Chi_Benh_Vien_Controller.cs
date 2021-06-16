@@ -114,7 +114,7 @@ namespace Controller.DM_AD
 			}
 		}
 
-		#region Custom
+		#region Customize
 		public IList<CAD_Dia_Chi_Benh_Vien> F3_1_List_AD_Dia_Chi_Benh_Vien_By_Benh_Vien_ID(int p_intBenh_Vien_ID)
 		{
 			IList<CAD_Dia_Chi_Benh_Vien> v_arrRes = new List<CAD_Dia_Chi_Benh_Vien>();
@@ -157,6 +157,22 @@ namespace Controller.DM_AD
 				throw ex;
 			}
 		}
+
+		public int F3_3_Get_Benh_Vien_ID_By_Dia_Chi_ID(int p_intDia_Chi_ID)
+        {
+			int v_iRes = CConst.INT_VALUE_NULL;
+            try
+            {
+				v_iRes = Convert.ToInt32(CSqlHelper.ExecuteScalar(CConfig.g_strLuan_Van_Data_Conn_String, "F3_3_sp_sel_Get_Benh_Vien_ID_By_Dia_Chi_ID",
+					p_intDia_Chi_ID));
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+			return v_iRes;
+        }
 		#endregion
 	}
 }

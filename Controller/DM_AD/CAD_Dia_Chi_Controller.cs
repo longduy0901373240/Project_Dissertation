@@ -113,5 +113,37 @@ namespace Controller.DM_AD
 				throw ex;
 			}
 		}
+
+        #region Customize
+		public IList<CAD_Dia_Chi> F2_1_List_AD_Dia_Chi_By_Quan_ID(int p_intQuan_ID)
+        {
+			IList<CAD_Dia_Chi> v_arrRes = new List<CAD_Dia_Chi>();
+			DataTable v_dt = new DataTable();
+
+			try
+			{
+				CSqlHelper.FillDataTable(CConfig.g_strLuan_Van_Data_Conn_String, v_dt, "F2_1_sp_sel_List_AD_Dia_Chi_By_Quan_ID",
+					p_intQuan_ID);
+
+				foreach (DataRow v_row in v_dt.Rows)
+				{
+					CAD_Dia_Chi v_objRes = CUtility.Map<CAD_Dia_Chi>(v_row);
+					v_arrRes.Add(v_objRes);
+				}
+			}
+
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+
+			finally
+			{
+				v_dt.Dispose();
+			}
+
+			return v_arrRes;
+		}
+		#endregion
 	}
 }

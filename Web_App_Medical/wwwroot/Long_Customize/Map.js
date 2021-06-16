@@ -20,26 +20,70 @@ function initAutocompleteAddress_User() {
 }
 
 //--------------------------------------------------------------------------------------------
-
+let markers_Address_User = [];
 function Marker_Address_User(p_strAddress_User) {
+    if (markers_Address_User[0] != null) {
+        markers_Address_User[0].setMap(null);
+        markers_Address_User = [];
+    }
     var address = p_strAddress_User;
-    console.log(address);
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({ 'address': address }, function (results, status) {
         if (status === 'OK') {
-            p_map.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
-                map: p_map,
+                map: map,
                 position: results[0].geometry.location
             });
+            markers_Address_User.push(marker);
+            var v_map = p_map;
+            v_map.setZoom(15);
+            v_map.panTo(results[0].geometry.location);
+            markers_Address_User[0].setMap(v_map);
         }
     });
 }
-
+//--------------------------------------------------------------------------------------------
+var directionsRenderer
+function point_Start_End(p_Start, p_End) {
+    if (directionsRenderer != null) {
+        directionsRenderer.setMap(null);
+        directionsRenderer.setPanel(null);
+        markers_Address_User[0].setMap(null);
+        markers_Address_User = [];
+    }
+    const directionsService = new google.maps.DirectionsService();
+    directionsRenderer = new google.maps.DirectionsRenderer();
+    var map = p_map;
+    directionsRenderer.setMap(map);
+    directionsRenderer.setPanel(document.getElementById("info_direct"));
+    var start = p_Start;
+    console.log(p_End);
+    var end = p_End.dia_Chi;
+    calculateAndDisplayRoute(directionsService, directionsRenderer, start, end);
+}
+function calculateAndDisplayRoute(directionsService, directionsRenderer, start, end) {
+    directionsService.route(
+        {
+            origin: {
+                query: start,
+            },
+            destination: {
+                query: end,
+            },
+            travelMode: google.maps.TravelMode.DRIVING,
+        },
+        (response, status) => {
+            if (status === "OK") {
+                directionsRenderer.setDirections(response);
+            } else {
+                window.alert("Directions request failed due to " + status);
+            }
+        }
+    );
+}
 //--------------------------------------Hiển thị marker bệnh viện------------------------------------------------------
 let markers_Benh_Vien = [];
 function List_Marker_Address_Benh_Vien(p_arrAddress_Benh_Vien) {
-    //var map = p_map;
     var arr = [];
     for (var i = 0; i < p_arrAddress_Benh_Vien.length; i++) {
         var item = {
@@ -54,7 +98,6 @@ function List_Marker_Address_Benh_Vien(p_arrAddress_Benh_Vien) {
         });
         markers_Benh_Vien.push(marker);
     };
-    console.log(markers_Benh_Vien);
 }
 function setMapOnAll_Benh_Vien(p_objmap) {
     for (let i = 0; i < markers_Benh_Vien.length; i++) {
@@ -65,7 +108,7 @@ function Hide_Markers_Benh_Vien() {
     setMapOnAll_Benh_Vien(null);
 }
 function Show_Markers_Benh_Vien() {
-    var map = p_map
+    var map = p_map;
     setMapOnAll_Benh_Vien(map);
 }
 //--------------------------------------------------------------------------------------------

@@ -13,23 +13,16 @@ namespace Web_App_Medical.Pages.Dashboard
         #region
         private IList<CAD_Dia_Chi> p_arrDia_Chi;
         private IList<CAD_Dia_Chi_Benh_Vien> p_arrDia_Chi_Benh_Vien;
-        private CAD_Dia_Chi p_objItem = new CAD_Dia_Chi();
         #endregion
 
         #region CheckBox
         private bool p_blCheck_Box_Benh_Vien { get; set; } = false;
         #endregion
         public string p_strAddress_User { get; set; }
-        protected override async void OnInitialized()
+        protected override void OnInitialized()
         {
             p_arrDia_Chi = _db_Dia_Chi.List_AD_Dia_Chi();
             p_arrDia_Chi_Benh_Vien = _db_Dia_Chi_Benh_Vien.List_AD_Dia_Chi_Benh_Vien();
-            #region
-            
-            #endregion
-            p_objItem = p_arrDia_Chi.FirstOrDefault();
-            
-
         }
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -57,17 +50,10 @@ namespace Web_App_Medical.Pages.Dashboard
         private async void EvenCheckBox_Benh_Vien(bool p_value)
         {
             p_blCheck_Box_Benh_Vien = p_value;
-            
             if (p_value == true)
-            {
                 await IJS.InvokeVoidAsync("Show_Markers_Benh_Vien");
-                //await IJS.InvokeVoidAsync("List_Marker_Address_Benh_Vien", v_arrDia_Chi_Benh_Vien);
-            }
             else
-            {
                 await IJS.InvokeVoidAsync("Hide_Markers_Benh_Vien");
-                //await IJS.InvokeVoidAsync("List_Marker_Address_Benh_Vien", v_arrDia_Chi_Benh_Vien);
-            }
         }
     }
 }

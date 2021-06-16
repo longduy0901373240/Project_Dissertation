@@ -1,0 +1,159 @@
+﻿@page "/dashboard/map_direct_benh_vien"
+
+@using Controller.DM_AD
+@using Entity.DM_AD
+
+@inject CAD_Quan_Controller _db_Quan
+@inject CAD_Dia_Chi_Controller _db_Dia_Chi
+@inject CAD_Dia_Chi_Benh_Vien_Controller _db_Dia_Chi_Benh_Vien
+@inject CAD_Khoa_Kham_Controller _db_Khoa_Kham
+@inject CAD_Khoa_Kham_Benh_Vien_Controller _db_Khoa_Kham_Benh_vien
+@inject CAD_Benh_Vien_Controller _db_Benh_Vien
+
+@inject IJSRuntime IJS
+
+<div class="row">
+    <div class="col-md-12">
+        <DxFormLayout>
+            <DxFormLayoutItem Caption="Vị trí bản thân" Context="FormLayoutContext" ColSpanMd="9">
+                <Template>
+                    <input id="Search_Address_User" class="form-control form-control-sm dxbs-form-control text-truncate" autocomplete="on" @bind-value="@p_strAddress_User" />
+                </Template>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Context="FormLayoutContext" ColSpanMd="3">
+                <Template>
+                    <DxButton Click="@Confirm_address_user" Text="Confirm address user"></DxButton>
+                </Template>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Khu vực" Context="FormLayoutContext" ColSpanMd="3">
+                <Template>
+                    <DxComboBox Data="@p_arrQuan" FilteringMode="DataGridFilteringMode.Contains"
+                                ReadOnly="@p_EnabledCB_Quan"
+                                NullText="Select quận..."
+                                ValueChanged="@((CAD_Quan Item)=>Selected_Quan_Changed(Item))"
+                                TextFieldName="@nameof(CAD_Quan.Ten_Quan)" Value="@p_objQuan" />
+                </Template>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Khoa khám" Context="FormLayoutContext" ColSpanMd="3">
+                <Template>
+                    <DxComboBox Data="@p_arrKhoa_Kham" FilteringMode="DataGridFilteringMode.Contains"
+                                ReadOnly="@p_EnabledCB_Khoa_Kham"
+                                NullText="Select khoa khám..."
+                                ValueChanged="@((CAD_Khoa_Kham Item)=>Selected_Khoa_Kham_Changed(Item))"
+                                TextFieldName="@nameof(CAD_Khoa_Kham.Ten_Khoa_Kham)" Value="@p_objKhoa_Kham" />
+                </Template>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Bệnh viện" Context="FormLayoutContext" ColSpanMd="3">
+                <Template>
+                    <DxComboBox Data="@p_arrBenh_Vien" FilteringMode="DataGridFilteringMode.Contains"
+                                ReadOnly="@p_EnabledCB_Benh_Vien"
+                                NullText="Select bệnh viện..."
+                                ValueChanged="@((CAD_Benh_Vien Item)=>Selected_Benh_Vien_Changed(Item))"
+                                TextFieldName="@nameof(CAD_Benh_Vien.Ten_Benh_Vien)" Value="@p_objBenh_Vien" />
+                </Template>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Context="FormLayoutContext" ColSpanMd="3">
+                <Template>
+                    <DxButton Text="Delete select hospital" Click="@Event_Click_Clear_Benh_Vien"></DxButton>
+                </Template>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Context="FormLayoutContext" ColSpanMd="12">
+                <Template>
+                    <DxButton Click="@Submit" Text="Submit"></DxButton>
+                </Template>
+            </DxFormLayoutItem>
+        </DxFormLayout>
+    </div>
+</div>
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8" id="map">
+        </div>
+        <div class="col-sm-4">
+            <p><h4>Hướng dẫn đường đi</h4></p>
+            <div id="info_direct"></div>
+        </div>
+    </div>
+</div>
+<br />
+@if (@p_objBenh_Vien != null)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <DxFormLayout>
+                <DxFormLayoutTabPages @bind-ActiveTabIndex="ActiveTabIndex">
+                    <DxFormLayoutTabPage Caption="Thông tin bệnh viện">
+                        <DxFormLayoutItem Caption="Tên bệnh viện: " Context="FormLayoutContext" ColSpanMd="6">
+                            <Template>
+                                <label class="col-form-label col-form-label-sm  dxbs-fl-cpt">@p_objBenh_Vien.Ten_Benh_Vien</label>
+                            </Template>
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Chuyên khoa: " Context="FormLayoutContext" ColSpanMd="6">
+                            <Template>
+                                @if (p_objChuyen_Khoa_Benh_Vien.Ten_Khoa_Kham == null || p_objChuyen_Khoa_Benh_Vien.Ten_Khoa_Kham == "")
+                                {
+                                    <label class="col-form-label col-form-label-sm  dxbs-fl-cpt">Updating</label>
+                                }
+                                else
+                                {
+                                    <label class="col-form-label col-form-label-sm  dxbs-fl-cpt">@p_objChuyen_Khoa_Benh_Vien.Ten_Khoa_Kham</label>
+                                }
+                            </Template>
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Mô tả chuyên khoa: " Context="FormLayoutContext" ColSpanMd="12">
+                            <Template>
+                                @if (p_objChuyen_Khoa_Benh_Vien.Mo_Ta == null || p_objChuyen_Khoa_Benh_Vien.Mo_Ta == "")
+                                {
+                                    <label class="col-form-label col-form-label-sm  dxbs-fl-cpt">Updating</label>
+                                }
+                                else
+                                {
+                                    <label class="col-form-label col-form-label-sm  dxbs-fl-cpt">@p_objChuyen_Khoa_Benh_Vien.Mo_Ta</label>
+                                }
+                            </Template>
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Số điện thoại liên lạc: " Context="FormLayoutContext" ColSpanMd="6">
+                            <Template>
+                                @if (p_objBenh_Vien.SDT == null || p_objBenh_Vien.SDT == "")
+                                {
+                                    <label class="col-form-label col-form-label-sm  dxbs-fl-cpt">Updating</label>
+                                }
+                                else
+                                {
+                                    <label class="col-form-label col-form-label-sm  dxbs-fl-cpt">@p_objBenh_Vien.SDT</label>
+                                }
+                            </Template>
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Email liên lạc: " Context="FormLayoutContext" ColSpanMd="6">
+                            <Template>
+                                @if (p_objBenh_Vien.Email == null || p_objBenh_Vien.Email == "")
+                                {
+                                    <label class="col-form-label col-form-label-sm  dxbs-fl-cpt">Updating</label>
+                                }
+                                else
+                                {
+                                    <label class="col-form-label col-form-label-sm  dxbs-fl-cpt">@p_objBenh_Vien.Email</label>
+                                }
+                            </Template>
+                        </DxFormLayoutItem>
+                    </DxFormLayoutTabPage>
+                    <DxFormLayoutTabPage Caption="Thông tin khoa khám bệnh viện">
+                        <DxFormLayoutItem ColSpanMd="12">
+                            <Template>
+                                <DxDataGrid Data="p_arrKhoa_Kham_Benh_Vien">
+                                    <Columns>
+                                        <DxDataGridComboBoxColumn Caption="Khoa khám" Field="@nameof(CAD_Khoa_Kham_Benh_Vien.Khoa_Kham_ID)"
+                                                                  Data="p_arrKhoa_Kham" TextFieldName="Ten_Khoa_Kham" ValueFieldName="Auto_ID" />
+                                        <DxDataGridComboBoxColumn Caption="Mô tả" Field="@nameof(CAD_Khoa_Kham_Benh_Vien.Khoa_Kham_ID)"
+                                                                  Data="p_arrKhoa_Kham" TextFieldName="Mo_Ta" ValueFieldName="Auto_ID" />
+                                    </Columns>
+                                </DxDataGrid>
+                            </Template>
+                        </DxFormLayoutItem>
+                    </DxFormLayoutTabPage>
+                </DxFormLayoutTabPages>
+            </DxFormLayout>
+        </div>
+    </div>
+}
