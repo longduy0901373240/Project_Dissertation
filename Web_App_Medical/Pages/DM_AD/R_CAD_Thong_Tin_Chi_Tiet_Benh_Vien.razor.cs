@@ -35,6 +35,12 @@ namespace Web_App_Medical.Pages.DM_AD
 
         private bool IsNewRow { get; set; }
         public string Error { get; set; }
+        private string p_strSessionValue = "";
+
+        protected override async Task OnInitializedAsync()
+        {
+            p_strSessionValue = await iLocalStorage.GetItemAsync<string>("SessionValue");
+        }
 
         #region Loading khi vào page
         protected override void OnInitialized()

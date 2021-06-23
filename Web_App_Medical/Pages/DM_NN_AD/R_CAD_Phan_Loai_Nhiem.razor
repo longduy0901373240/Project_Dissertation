@@ -1,0 +1,93 @@
+﻿@layout AdminLayout
+
+@page "/danh_muc_nguoi_nhiem_ad/phan_loai_nhiem"
+
+@using Controller.DM_NN_AD
+@using Entity.DM_NN_AD
+
+@inject CAD_Phan_Loai_Nhiem_Controller _db_Phan_Loai_Nhiem
+
+@inject IJSRuntime IJS
+@inject IWebHostEnvironment env
+@inject ILocalStorageService iLocalStorage
+
+@if (p_strSessionValue == "")
+{
+    <p>Bạn cần đăng nhập để thực hiện chức năng</p>
+}
+else
+{
+    <h3>Hiển thị thông tin của các loại bệnh</h3>
+    <h4>Bảng thông tin các loại bệnh</h4>
+    <div class="row">
+        <div class="col-md-12">
+            <DxFormLayout>
+                <DxFormLayoutGroup Caption="Import Excel" ColSpanMd="12">
+                    <DxFormLayoutItem Context="FormLayoutImportExcelContext" ColSpanMd="6">
+                        <Template>
+                            <InputFile class="btn btn-sm dx-btn  btn-primary" OnChange="OnInputFileChange" id="InputFile_Custom" />
+                        </Template>
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Context="FormLayoutImportExcelContext" ColSpanMd="3">
+                        <Template>
+                            <DxButton Text="Submit" @onclick="Import_Excel" />
+                        </Template>
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Context="FormLayoutImportExcelContext" ColSpanMd="3">
+                        <Template>
+                            <a href="/FileManagement/Template/Template_Phan_Loai_Nhiem.xlsx" download="Template_Phan_Loai_Nhiem.xlsx">
+                                <DxButton Text="Download Template" />
+                            </a>
+                        </Template>
+                    </DxFormLayoutItem>
+                </DxFormLayoutGroup>
+            </DxFormLayout>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @if (p_arrPhan_Loai_Nhiem == null)
+            {
+                <p><em>Loading...</em></p>
+            }
+            else
+            {
+                <DxDataGrid Data="p_arrPhan_Loai_Nhiem" EditMode="DataGridEditMode.PopupEditForm"
+                            @ref="_Grid_Phan_Loai_Nhiem"
+                            RowRemoving="@OnRowDeleting"
+                            RowInsertStart="@(() => OnRowStarting(null))"
+                            RowEditStart="@((Item) => OnRowStarting(Item))">
+                    <Columns>
+                        <DxDataGridCommandColumn Width="150px" />
+                        <DxDataGridColumn Caption="Tên loại nhiễm" Field="@nameof(CAD_Phan_Loai_Nhiem.Ten_Loai_Nhiem)" />
+                        <DxDataGridColumn Caption="Mô tả" Field="@nameof(CAD_Phan_Loai_Nhiem.Ghi_Chu)" />
+                    </Columns>
+                    <EditFormTemplate>
+                        <EditForm Model="p_objPhan_Loai_Nhiem" Context="EditFormContext" OnValidSubmit="@HandleValiSubmit">
+                            <DxFormLayout>
+                                <DxFormLayoutItem Caption="Tên loại nhiểm" Context="FormLayoutContext" ColSpanMd="12">
+                                    <Template>
+                                        <DxTextBox @bind-Text="p_objPhan_Loai_Nhiem.Ten_Loai_Nhiem" />
+                                    </Template>
+                                </DxFormLayoutItem>
+                                <DxFormLayoutItem Caption="Mô tả" Context="FormLayoutContext" ColSpanMd="12">
+                                    <Template>
+                                        <DxMemo @bind-Text="p_objPhan_Loai_Nhiem.Ghi_Chu" />
+                                    </Template>
+                                </DxFormLayoutItem>
+                                <DxFormLayoutItem Context="FormLayoutContext" ColSpanMd="12">
+                                    <Template>
+                                        <div class="text-right">
+                                            <DxButton RenderStyle="ButtonRenderStyle.Link" SubmitFormOnClick="true" Text="Update" />
+                                            <DxButton RenderStyle="ButtonRenderStyle.Link" Click="OnCancelButtonClick" Text="Cancel" />
+                                        </div>
+                                    </Template>
+                                </DxFormLayoutItem>
+                            </DxFormLayout>
+                        </EditForm>
+                    </EditFormTemplate>
+                </DxDataGrid>
+            }
+        </div>
+    </div>
+}

@@ -96,6 +96,13 @@ using Microsoft.AspNetCore.Hosting;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 14 "D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\_Imports.razor"
+using Blazored.LocalStorage;
+
+#line default
+#line hidden
+#nullable disable
     public partial class Header : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -104,7 +111,7 @@ using Microsoft.AspNetCore.Hosting;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 10 "D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\Shared\Header.razor"
+#line 15 "D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\Shared\Header.razor"
        
     bool isDesktop = true, isToggled = true, isInitialized;
 
@@ -156,6 +163,10 @@ using Microsoft.AspNetCore.Hosting;
     public void Dispose()
     {
         NavigationManager.LocationChanged -= OnLocationChanged;
+    }
+    private void Event_Login()
+    {
+        NavigationManager.NavigateTo("/admin/sign_in");
     }
 
 #line default

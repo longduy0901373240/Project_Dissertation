@@ -93,6 +93,13 @@ using Microsoft.AspNetCore.Hosting;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 14 "D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\_Imports.razor"
+using Blazored.LocalStorage;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/error")]
     public partial class Error : Microsoft.AspNetCore.Components.ComponentBase
     {

@@ -1,5 +1,5 @@
 ﻿@inherits LayoutComponentBase
-
+@inject ILocalStorageService iLocalStorage
 
 <div class="page">
     <Header @bind-StateCssClass="@NavMenuCssClass" />
@@ -16,4 +16,8 @@
 
 @code{
     string NavMenuCssClass { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        await iLocalStorage.SetItemAsync("SessionValue", "");
+    }
 }

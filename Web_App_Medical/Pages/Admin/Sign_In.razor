@@ -1,0 +1,43 @@
+﻿@layout LogInLayout
+
+@page "/admin/sign_in"
+
+@inject ILocalStorageService iLocalStorage
+@inject NavigationManager nav
+<style>
+    .card-header {
+        text-align: center;
+    }
+
+    .dx-btn, .btn.dx-btn {
+        margin: auto;
+        display: block;
+        width: 100%
+    }
+
+    .dxbs-fl .dxbs-fl-gd {
+        padding-top: 200px;
+        margin: auto;
+        display: block;
+    }
+</style>
+
+<DxFormLayout>
+    <DxFormLayoutGroup Caption="Admin Login" ColSpanMd="6">
+        <DxFormLayoutItem Caption="User Name" Context="FormLayoutContext" ColSpanMd="12">
+            <Template>
+                <DxTextBox @bind-Text="p_strUserName"></DxTextBox>
+            </Template>
+        </DxFormLayoutItem>
+        <DxFormLayoutItem Caption="Password" Context="FormLayoutContext" ColSpanMd="12">
+            <Template>
+                <DxTextBox @bind-Text="p_strPassword"></DxTextBox>
+            </Template>
+        </DxFormLayoutItem>
+        <DxFormLayoutItem Context="FormLayoutContext" ColSpanMd="12">
+            <Template>
+                <DxButton Click="Event_Submit" Text="Sign In"></DxButton>
+            </Template>
+        </DxFormLayoutItem>
+    </DxFormLayoutGroup>
+</DxFormLayout>

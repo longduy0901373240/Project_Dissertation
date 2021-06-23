@@ -1,4 +1,6 @@
-﻿@page "/danh_muc_ad/quan"
+﻿@layout AdminLayout
+
+@page "/danh_muc_ad/quan"
 
 @using Controller.DM_AD
 @using Entity.DM_AD
@@ -7,71 +9,79 @@
 
 @inject IJSRuntime IJS
 @inject IWebHostEnvironment env
+@inject ILocalStorageService iLocalStorage
 
-<h3>Hiển thị thông tin của các quận</h3>
-<h4>Bảng thông tin các quận</h4>
-<div class="row">
-    <div class="col-md-12">
-        <DxFormLayout>
-            <DxFormLayoutGroup Caption="Import Excel" ColSpanMd="12">
-                <DxFormLayoutItem Context="FormLayoutImportExcelContext" ColSpanMd="6">
-                    <Template>
-                        <InputFile class="btn btn-sm dx-btn  btn-primary" OnChange="OnInputFileChange" id="InputFile_Custom" />
-                    </Template>
-                </DxFormLayoutItem>
-                <DxFormLayoutItem Context="FormLayoutImportExcelContext" ColSpanMd="3">
-                    <Template>
-                        <DxButton Text="Submit" @onclick="Import_Excel" />
-                    </Template>
-                </DxFormLayoutItem>
-                <DxFormLayoutItem Context="FormLayoutImportExcelContext" ColSpanMd="3">
-                    <Template>
-                        <a href="/FileManagement/Template/Template_Quan.xlsx" download="Template_Quan.xlsx">
-                            <DxButton Text="Download Template" />
-                        </a>
-                    </Template>
-                </DxFormLayoutItem>
-            </DxFormLayoutGroup>
-        </DxFormLayout>
+@if (p_strSessionValue == "")
+{
+    <p>Bạn cần đăng nhập để thực hiện chức năng</p>
+}
+else
+{
+    <h3>Hiển thị thông tin của các quận</h3>
+    <h4>Bảng thông tin các quận</h4>
+    <div class="row">
+        <div class="col-md-12">
+            <DxFormLayout>
+                <DxFormLayoutGroup Caption="Import Excel" ColSpanMd="12">
+                    <DxFormLayoutItem Context="FormLayoutImportExcelContext" ColSpanMd="6">
+                        <Template>
+                            <InputFile class="btn btn-sm dx-btn  btn-primary" OnChange="OnInputFileChange" id="InputFile_Custom" />
+                        </Template>
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Context="FormLayoutImportExcelContext" ColSpanMd="3">
+                        <Template>
+                            <DxButton Text="Submit" @onclick="Import_Excel" />
+                        </Template>
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Context="FormLayoutImportExcelContext" ColSpanMd="3">
+                        <Template>
+                            <a href="/FileManagement/Template/Template_Quan.xlsx" download="Template_Quan.xlsx">
+                                <DxButton Text="Download Template" />
+                            </a>
+                        </Template>
+                    </DxFormLayoutItem>
+                </DxFormLayoutGroup>
+            </DxFormLayout>
+        </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        @if (p_arrQuan == null)
-        {
-            <p><em>Loading...</em></p>
-        }
-        else
-        {
-            <DxDataGrid Data="p_arrQuan" EditMode="DataGridEditMode.PopupEditForm"
-                        @ref="_Grid_Quan"
-                        RowRemoving="@OnRowDeleting"
-                        RowInsertStart="@(() => OnRowStarting(null))"
-                        RowEditStart="@((Item) => OnRowStarting(Item))">
-                <Columns>
-                    <DxDataGridCommandColumn Width="150px" />
-                    <DxDataGridColumn Caption="Tên quận" Field="@nameof(CAD_Quan.Ten_Quan)" />
-                </Columns>
-                <EditFormTemplate>
-                    <EditForm Model="p_objQuan" Context="EditFormContext" OnValidSubmit="@HandleValiSubmit">
-                        <DxFormLayout>
-                            <DxFormLayoutItem Caption="Tên quận" Context="FormLayoutContext" ColSpanMd="12">
-                                <Template>
-                                    <DxTextBox @bind-Text="p_objQuan.Ten_Quan" />
-                                </Template>
-                            </DxFormLayoutItem>
-                            <DxFormLayoutItem Context="FormLayoutContext" ColSpanMd="12">
-                                <Template>
-                                    <div class="text-right">
-                                        <DxButton RenderStyle="ButtonRenderStyle.Link" SubmitFormOnClick="true" Text="Update" />
-                                        <DxButton RenderStyle="ButtonRenderStyle.Link" Click="OnCancelButtonClick" Text="Cancel" />
-                                    </div>
-                                </Template>
-                            </DxFormLayoutItem>
-                        </DxFormLayout>
-                    </EditForm>
-                </EditFormTemplate>
-            </DxDataGrid>
-        }
+    <div class="row">
+        <div class="col-md-12">
+            @if (p_arrQuan == null)
+            {
+                <p><em>Loading...</em></p>
+            }
+            else
+            {
+                <DxDataGrid Data="p_arrQuan" EditMode="DataGridEditMode.PopupEditForm"
+                            @ref="_Grid_Quan"
+                            RowRemoving="@OnRowDeleting"
+                            RowInsertStart="@(() => OnRowStarting(null))"
+                            RowEditStart="@((Item) => OnRowStarting(Item))">
+                    <Columns>
+                        <DxDataGridCommandColumn Width="150px" />
+                        <DxDataGridColumn Caption="Tên quận" Field="@nameof(CAD_Quan.Ten_Quan)" />
+                    </Columns>
+                    <EditFormTemplate>
+                        <EditForm Model="p_objQuan" Context="EditFormContext" OnValidSubmit="@HandleValiSubmit">
+                            <DxFormLayout>
+                                <DxFormLayoutItem Caption="Tên quận" Context="FormLayoutContext" ColSpanMd="12">
+                                    <Template>
+                                        <DxTextBox @bind-Text="p_objQuan.Ten_Quan" />
+                                    </Template>
+                                </DxFormLayoutItem>
+                                <DxFormLayoutItem Context="FormLayoutContext" ColSpanMd="12">
+                                    <Template>
+                                        <div class="text-right">
+                                            <DxButton RenderStyle="ButtonRenderStyle.Link" SubmitFormOnClick="true" Text="Update" />
+                                            <DxButton RenderStyle="ButtonRenderStyle.Link" Click="OnCancelButtonClick" Text="Cancel" />
+                                        </div>
+                                    </Template>
+                                </DxFormLayoutItem>
+                            </DxFormLayout>
+                        </EditForm>
+                    </EditFormTemplate>
+                </DxDataGrid>
+            }
+        </div>
     </div>
-</div>
+}

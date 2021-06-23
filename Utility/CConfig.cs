@@ -6,6 +6,7 @@ namespace Utility
         /// Câu kết nối vào database
         /// </summary>
         public static string g_strLuan_Van_Data_Conn_String = "";
+        public static string g_strLuan_Van_Admin_Conn_String = "";
 
         // Thông tin header báo cáo
         public static string g_strCompany_Name = "";

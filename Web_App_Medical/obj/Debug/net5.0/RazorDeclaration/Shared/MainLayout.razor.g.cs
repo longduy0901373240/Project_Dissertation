@@ -96,6 +96,13 @@ using Microsoft.AspNetCore.Hosting;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 14 "D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\_Imports.razor"
+using Blazored.LocalStorage;
+
+#line default
+#line hidden
+#nullable disable
     public partial class MainLayout : LayoutComponentBase
     {
         #pragma warning disable 1998
@@ -107,10 +114,15 @@ using Microsoft.AspNetCore.Hosting;
 #line 17 "D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\Shared\MainLayout.razor"
       
     string NavMenuCssClass { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        await iLocalStorage.SetItemAsync("SessionValue", "");
+    }
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private ILocalStorageService iLocalStorage { get; set; }
     }
 }
 #pragma warning restore 1591

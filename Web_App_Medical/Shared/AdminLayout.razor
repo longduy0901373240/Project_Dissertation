@@ -1,0 +1,19 @@
+﻿@inherits LayoutComponentBase
+
+
+<div class="page">
+    <AdminHeader  @bind-StateCssClass="@NavMenuCssClass"/>
+
+    <div class="main">
+        <div class="sidebar @NavMenuCssClass">
+            <AdminNavMenu/>
+        </div>
+        <div class="content px-4">
+            @Body
+        </div>
+    </div>
+</div>
+
+@code{
+    string NavMenuCssClass { get; set; }
+}

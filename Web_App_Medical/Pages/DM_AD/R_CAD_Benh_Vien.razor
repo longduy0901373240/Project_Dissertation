@@ -1,72 +1,85 @@
-﻿@page "/danh_muc_ad/benh_vien"
+﻿@layout AdminLayout
+
+@page "/danh_muc_ad/benh_vien"
 
 @using Controller.DM_AD
 @using Entity.DM_AD
 
 @inject CAD_Benh_Vien_Controller _db_Benh_Vien
+@inject CAD_Dia_Chi_Benh_Vien_Controller _db_Dia_Chi_Benh_Vien
+@inject CAD_Dia_Chi_Controller _db_Dia_chi
+@inject CAD_Khoa_Kham_Benh_Vien_Controller _db_Khoa_Kham_Benh_Vien
 @inject CAD_Khoa_Kham_Controller _db_Khoa_Kham
 
 @inject IJSRuntime IJS
+@inject ILocalStorageService iLocalStorage
 
-<h3>Hiển thị thông tin của các bệnh viện</h3>
-<h4>Bảng thông tin các bệnh viện</h4>
-<div class="row">
-    <div class="col-md-12">
-        @if (p_arrBenh_Vien == null)
-        {
-            <p><em>Loading...</em></p>
-        }
-        else
-        {
-            <DxDataGrid Data="p_arrBenh_Vien" EditMode="DataGridEditMode.PopupEditForm"
-                        @ref="_Grid_Benh_Vien"
-                        RowRemoving="@OnRowDeleting"
-                        RowInsertStart="@(() => OnRowStarting(null))"
-                        RowEditStart="@((Item) => OnRowStarting(Item))">
-                <Columns>
-                    <DxDataGridCommandColumn Width="150px" />
-                    <DxDataGridColumn Caption="Tên bệnh viện" Field="@nameof(CAD_Benh_Vien.Ten_Benh_Vien)" />
-                    <DxDataGridColumn Caption="SĐT" Field="@nameof(CAD_Benh_Vien.SDT)" />
-                    <DxDataGridColumn Caption="Email" Field="@nameof(CAD_Benh_Vien.Email)" />
-                    <DxDataGridComboBoxColumn Caption="Chuyện khoa" Field="@nameof(CAD_Benh_Vien.Chuyen_Khoa)"
-                                Data="p_arrKhoa_Kham" ValueFieldName="@nameof(CAD_Khoa_Kham.Auto_ID)" TextFieldName="@nameof(CAD_Khoa_Kham.Ten_Khoa_Kham)"/>
-                </Columns>
-                <EditFormTemplate>
-                    <EditForm Model="p_objBenh_Vien" Context="EditFormContext" OnValidSubmit="@HandleValiSubmit">
-                        <DxFormLayout>
-                            <DxFormLayoutItem Caption="Tên bệnh viện" Context="FormLayoutContext" ColSpanMd="12">
-                                <Template>
-                                    <DxTextBox @bind-Text="p_objBenh_Vien.Ten_Benh_Vien" />
-                                </Template>
-                            </DxFormLayoutItem>
-                            <DxFormLayoutItem Caption="Số điện thoại" Context="FormLayoutContext" ColSpanMd="12">
-                                <Template>
-                                    <DxTextBox @bind-Text="p_objBenh_Vien.SDT" />
-                                </Template>
-                            </DxFormLayoutItem>
-                            <DxFormLayoutItem Caption="Email" Context="FormLayoutContext" ColSpanMd="12">
-                                <Template>
-                                    <DxTextBox @bind-Text="p_objBenh_Vien.Email" />
-                                </Template>
-                            </DxFormLayoutItem>
-                            <DxFormLayoutItem Caption="Chuyên khoa" Context="FormLayoutContext" ColSpanMd="12">
-                                <Template>
-                                    <DxComboBox @bind-Value="p_objBenh_Vien.Chuyen_Khoa" FilteringMode="DataGridFilteringMode.Contains"
-                                                Data="p_arrKhoa_Kham" ValueFieldName="Auto_ID" TextFieldName="Ten_Khoa_Kham"/>
-                                </Template>
-                            </DxFormLayoutItem>
-                            <DxFormLayoutItem Context="FormLayoutContext" ColSpanMd="12">
-                                <Template>
-                                    <div class="text-right">
-                                        <DxButton RenderStyle="ButtonRenderStyle.Link" SubmitFormOnClick="true" Text="Update" />
-                                        <DxButton RenderStyle="ButtonRenderStyle.Link" Click="OnCancelButtonClick" Text="Cancel" />
-                                    </div>
-                                </Template>
-                            </DxFormLayoutItem>
-                        </DxFormLayout>
-                    </EditForm>
-                </EditFormTemplate>
-            </DxDataGrid>
-        }
+@if (p_strSessionValue=="")
+{
+    <p>Bạn cần đăng nhập để thực hiện chức năng</p>
+}
+else
+{
+    <h3>Hiển thị thông tin của các bệnh viện</h3>
+    <h4>Bảng thông tin các bệnh viện</h4>
+    <div class="row">
+        <div class="col-md-12">
+            @if (p_arrBenh_Vien == null)
+            {
+                <p><em>Loading...</em></p>
+            }
+            else
+            {
+                <DxDataGrid Data="p_arrBenh_Vien" EditMode="DataGridEditMode.PopupEditForm"
+                            @ref="_Grid_Benh_Vien"
+                            RowRemoving="@OnRowDeleting"
+                            RowInsertStart="@(() => OnRowStarting(null))"
+                            RowEditStart="@((Item) => OnRowStarting(Item))">
+                    <Columns>
+                        <DxDataGridCommandColumn Width="150px" />
+                        <DxDataGridColumn Caption="Tên bệnh viện" Field="@nameof(CAD_Benh_Vien.Ten_Benh_Vien)" />
+                        <DxDataGridColumn Caption="SĐT" Field="@nameof(CAD_Benh_Vien.SDT)" />
+                        <DxDataGridColumn Caption="Email" Field="@nameof(CAD_Benh_Vien.Email)" />
+                        <DxDataGridComboBoxColumn Caption="Chuyện khoa" Field="@nameof(CAD_Benh_Vien.Chuyen_Khoa)"
+                                                  Data="p_arrKhoa_Kham" ValueFieldName="@nameof(CAD_Khoa_Kham.Auto_ID)" TextFieldName="@nameof(CAD_Khoa_Kham.Ten_Khoa_Kham)" />
+                    </Columns>
+                    <EditFormTemplate>
+                        <EditForm Model="p_objBenh_Vien" Context="EditFormContext" OnValidSubmit="@HandleValiSubmit">
+                            <DxFormLayout>
+                                <DxFormLayoutItem Caption="Tên bệnh viện" Context="FormLayoutContext" ColSpanMd="12">
+                                    <Template>
+                                        <DxTextBox @bind-Text="p_objBenh_Vien.Ten_Benh_Vien" />
+                                    </Template>
+                                </DxFormLayoutItem>
+                                <DxFormLayoutItem Caption="Số điện thoại" Context="FormLayoutContext" ColSpanMd="12">
+                                    <Template>
+                                        <DxTextBox @bind-Text="p_objBenh_Vien.SDT" />
+                                    </Template>
+                                </DxFormLayoutItem>
+                                <DxFormLayoutItem Caption="Email" Context="FormLayoutContext" ColSpanMd="12">
+                                    <Template>
+                                        <DxTextBox @bind-Text="p_objBenh_Vien.Email" />
+                                    </Template>
+                                </DxFormLayoutItem>
+                                <DxFormLayoutItem Caption="Chuyên khoa" Context="FormLayoutContext" ColSpanMd="12">
+                                    <Template>
+                                        <DxComboBox @bind-Value="p_objBenh_Vien.Chuyen_Khoa" FilteringMode="DataGridFilteringMode.Contains"
+                                                    Data="p_arrKhoa_Kham" ValueFieldName="Auto_ID" TextFieldName="Ten_Khoa_Kham" />
+                                    </Template>
+                                </DxFormLayoutItem>
+                                <DxFormLayoutItem Context="FormLayoutContext" ColSpanMd="12">
+                                    <Template>
+                                        <div class="text-right">
+                                            <DxButton RenderStyle="ButtonRenderStyle.Link" SubmitFormOnClick="true" Text="Update" />
+                                            <DxButton RenderStyle="ButtonRenderStyle.Link" Click="OnCancelButtonClick" Text="Cancel" />
+                                        </div>
+                                    </Template>
+                                </DxFormLayoutItem>
+                            </DxFormLayout>
+                        </EditForm>
+                    </EditFormTemplate>
+                </DxDataGrid>
+            }
+        </div>
     </div>
-</div>
+}

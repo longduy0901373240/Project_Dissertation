@@ -348,6 +348,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Blazored.LocalStorage": {
+              "target": "Package",
+              "version": "[4.1.2, )"
+            },
             "DevExpress.Blazor": {
               "target": "Package",
               "version": "[20.2.4, )"

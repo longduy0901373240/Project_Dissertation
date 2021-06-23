@@ -1,4 +1,6 @@
+using Blazored.LocalStorage;
 using Controller.DM_AD;
+using Controller.DM_NN_AD;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -34,9 +36,17 @@ namespace Web_App_Medical
             services.AddSingleton<CAD_Khoa_Kham_Benh_Vien_Controller>();
             services.AddSingleton<CAD_Dia_Chi_Controller>();
 
+            services.AddSingleton<CAD_Loai_Benh_Controller>();
+            services.AddSingleton<CAD_Phan_Loai_Nhiem_Controller>();
+            services.AddSingleton<CAD_Nguoi_Nhiem_Benh_Controller>();
+            services.AddSingleton<CAD_Dia_Chi_Nguoi_Nhiem_Benh_Controller>();
+
             services.AddHttpContextAccessor();
 
+            services.AddBlazoredLocalStorage();
+
             services.AddSingleton(CConfig.g_strLuan_Van_Data_Conn_String = Configuration.GetConnectionString("Luan_Van_Data_Conn_String").ToString());
+            services.AddSingleton(CConfig.g_strLuan_Van_Admin_Conn_String = Configuration.GetConnectionString("Luan_Van_Admin_Conn_String").ToString());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

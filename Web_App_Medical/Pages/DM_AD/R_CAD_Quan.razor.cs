@@ -20,6 +20,12 @@ namespace Web_App_Medical.Pages.DM_AD
         CAD_Quan p_objQuan;
         private bool IsNewRow { get; set; }
         public string Error { get; set; }
+        private string p_strSessionValue = "";
+
+        protected override async Task OnInitializedAsync()
+        {
+            p_strSessionValue = await iLocalStorage.GetItemAsync<string>("SessionValue");
+        }
         protected override void OnInitialized()
         {
             p_arrQuan = _db_Quan.List_AD_Quan();

@@ -1,0 +1,169 @@
+﻿@layout AdminLayout
+
+@using Controller.DM_NN_AD
+@using Controller.DM_AD
+@using Entity.DM_NN_AD
+@using Entity.DM_AD
+
+@page "/danh_muc_nguoi_nhiem_ad/nguoi_nhiem_benh"
+
+@inject CAD_Nguoi_Nhiem_Benh_Controller _db_Nguoi_Nhiem_Benh
+@inject CAD_Loai_Benh_Controller _db_Loai_Benh
+@inject CAD_Phan_Loai_Nhiem_Controller _db_Phan_Loai_Nhiem
+@inject CAD_Dia_Chi_Nguoi_Nhiem_Benh_Controller _db_Dia_Chi_Nguoi_Nhiem_Benh
+@inject CAD_Dia_Chi_Controller _db_Dia_Chi
+@inject CAD_Quan_Controller _db_Quan
+
+@inject IJSRuntime IJS
+@inject IWebHostEnvironment env
+@inject ILocalStorageService iLocalStorage
+
+@if (p_strSessionValue == "")
+{
+    <p>Bạn cần đăng nhập để thực hiện chức năng</p>
+}
+else
+{
+    <h3>Hiển thị thông tin của các người nhiễm bệnh</h3>
+    <h4>Bảng thông tin các người nhiễm bệnh</h4>
+    <div class="row">
+        <div class="col-md-12">
+            @if (p_arrNguoi_Nhiem_Benh == null)
+            {
+                <p><em>Loading...</em></p>
+            }
+            else
+            {
+                <DxDataGrid Data="p_arrNguoi_Nhiem_Benh" EditMode="DataGridEditMode.PopupEditForm"
+                            @ref="_Grid_Nguoi_Nhiem_Benh"
+                            RowRemoving="@OnRowDeleting_Nguoi_Nhiem_Benh"
+                            RowInsertStart="@(()=>OnRowStarting_Nguoi_Nhiem_Benh(null))"
+                            RowEditStart="@((Item)=>OnRowStarting_Nguoi_Nhiem_Benh(Item))"
+                            ShowDetailRow="true">
+                    <Columns>
+                        <DxDataGridCommandColumn Width="150px" />
+                        <DxDataGridColumn Caption="Tên người nhiễm" Field="@nameof(CAD_Nguoi_Nhiem_Benh.Ten_Nguoi_Nhiem)" />
+                        <DxDataGridDateEditColumn Caption="Ngày sinh" Field="@nameof(CAD_Nguoi_Nhiem_Benh.Ngay_Sinh)" />
+                        <DxDataGridColumn Caption="Số điền thoại" Field="@nameof(CAD_Nguoi_Nhiem_Benh.SDT)" />
+                        <DxDataGridColumn Caption="Email" Field="@nameof(CAD_Nguoi_Nhiem_Benh.Email)" />
+                        <DxDataGridComboBoxColumn Caption="Bệnh nhiễm" Field="@nameof(CAD_Nguoi_Nhiem_Benh.ID_Loai_Benh)"
+                                                  Data="p_arrLoai_Benh" ValueFieldName="@nameof(CAD_Loai_Benh.Auto_ID)" TextFieldName="@nameof(CAD_Loai_Benh.Ten_Loai_Benh)" />
+                        <DxDataGridComboBoxColumn Caption="Cấp độ" Field="@nameof(CAD_Nguoi_Nhiem_Benh.ID_Phan_Loai_Nhiem)"
+                                                  Data="p_arrPhan_Loai_Nhiem" ValueFieldName="@nameof(CAD_Phan_Loai_Nhiem.Auto_ID)" TextFieldName="@nameof(CAD_Phan_Loai_Nhiem.Ten_Loai_Nhiem)" />
+                        <DxDataGridCheckBoxColumn Caption="Xác nhận" Field="@nameof(CAD_Nguoi_Nhiem_Benh.Xac_Nhan)" />
+                    </Columns>
+                    <DetailRowTemplate Context="dataItem">
+                        @{
+                                    p_intAuto_ID_Nguoi_Nhiem_Benh = dataItem.Auto_ID;
+                                    p_arrDia_Chi_Nguoi_Nhiem_By_Nguoi_Nhiem_ID = Get_List_Dia_Chi_Nguoi_Nhiem_Benh(dataItem.Auto_ID);
+                        }
+                        <DxFormLayout>
+                            <DxFormLayoutItem ColSpanMd="12">
+                                <Template>
+                                    <DxDataGrid Data="p_arrDia_Chi_Nguoi_Nhiem_By_Nguoi_Nhiem_ID" EditMode="DataGridEditMode.PopupEditForm"
+                                                @ref="_Grid_Dia_Chi_Nguoi_Nhiem_Benh"
+                                                RowRemoving="OnRowDeleting_Dia_Chi_Nguoi_Nhiem_Benh"
+                                                RowInsertStart="@(()=>OnRowStarting_Dia_Chi_Nguoi_Nhiem(null))"
+                                                RowEditStart="@((Item)=>OnRowStarting_Dia_Chi_Nguoi_Nhiem(Item))">
+                                        <Columns>
+                                            <DxDataGridCommandColumn Width="150px" />
+                                            <DxDataGridColumn Caption="Địa chỉ" Field="@nameof(CAD_Dia_Chi.Dia_Chi)" />
+                                            <DxDataGridColumn Caption="Latitude" Field="@nameof(CAD_Dia_Chi.Lat)" />
+                                            <DxDataGridColumn Caption="Longitude" Field="@nameof(CAD_Dia_Chi.Lng)" />
+                                        </Columns>
+                                        <EditFormTemplate Context="childEditFormTemplate">
+                                            <EditForm Model="p_objDia_Chi_Nguoi_Nhiem_Benh" Context="EditFormContext" OnValidSubmit="HandleValiSubmit_Dia_Chi_Nguoi_Nhiem">
+                                                <DxFormLayout>
+                                                    <DxFormLayoutItem Caption="Địa chỉ" Context="FormLayoutContext" ColSpanMd="12">
+                                                        <Template>
+                                                            <DxTextBox @bind-Text="p_objDia_Chi_Nguoi_Nhiem_Benh.Dia_Chi" />
+                                                        </Template>
+                                                    </DxFormLayoutItem>
+                                                    <DxFormLayoutItem Caption="Latitude" Context="FormLayoutContext" ColSpanMd="12">
+                                                        <Template>
+                                                            <DxTextBox @bind-Text="p_objDia_Chi_Nguoi_Nhiem_Benh.Lat" />
+                                                        </Template>
+                                                    </DxFormLayoutItem>
+                                                    <DxFormLayoutItem Caption="Longitude" Context="FormLayoutContext" ColSpanMd="12">
+                                                        <Template>
+                                                            <DxTextBox @bind-Text="p_objDia_Chi_Nguoi_Nhiem_Benh.Lng" />
+                                                        </Template>
+                                                    </DxFormLayoutItem>
+                                                    <DxFormLayoutItem Caption="Quận" Context="FormLayoutContext" ColSpanMd="12">
+                                                        <Template>
+                                                            <DxComboBox @bind-Value="p_objDia_Chi_Nguoi_Nhiem_Benh.Quan_ID" FilteringMode="DataGridFilteringMode.Contains"
+                                                                        Data="p_arrQuan" ValueFieldName="Auto_ID" TextFieldName="Ten_Quan" />
+                                                        </Template>
+                                                    </DxFormLayoutItem>
+                                                    <DxFormLayoutItem Context="FormLayoutContext" ColSpanMd="12">
+                                                        <Template>
+                                                            <div class="text-right">
+                                                                <DxButton RenderStyle="ButtonRenderStyle.Link" SubmitFormOnClick="true" Text="Update" />
+                                                                <DxButton RenderStyle="ButtonRenderStyle.Link" Click="OnCancelButtonClick_Dia_Chi_Nguoi_Nhiem" Text="Cancel" />
+                                                            </div>
+                                                        </Template>
+                                                    </DxFormLayoutItem>
+                                                </DxFormLayout>
+                                            </EditForm>
+                                        </EditFormTemplate>
+                                    </DxDataGrid>
+                                </Template>
+                            </DxFormLayoutItem>
+                        </DxFormLayout>
+                    </DetailRowTemplate>
+                    <EditFormTemplate>
+                        <EditForm Model="p_objNguoi_Nhiem_Benh" Context="EditFormContext" OnValidSubmit="@HandleValiSubmit_Nguoi_Nhiem_Benh">
+                            <DxFormLayout>
+                                <DxFormLayoutItem Caption="Tên người nhiễm" Context="FormLayoutContext" ColSpanMd="12">
+                                    <Template>
+                                        <DxTextBox @bind-Text="p_objNguoi_Nhiem_Benh.Ten_Nguoi_Nhiem" />
+                                    </Template>
+                                </DxFormLayoutItem>
+                                <DxFormLayoutItem Caption="Ngày sinh" Context="FormLayoutContext" ColSpanMd="12">
+                                    <Template>
+                                        <DxDateEdit @bind-Date="p_objNguoi_Nhiem_Benh.Ngay_Sinh" />
+                                    </Template>
+                                </DxFormLayoutItem>
+                                <DxFormLayoutItem Caption="Số điện thoại" Context="FormLayoutContext" ColSpanMd="12">
+                                    <Template>
+                                        <DxTextBox @bind-Text="p_objNguoi_Nhiem_Benh.SDT" />
+                                    </Template>
+                                </DxFormLayoutItem>
+                                <DxFormLayoutItem Caption="Email" Context="FormLayoutContext" ColSpanMd="12">
+                                    <Template>
+                                        <DxTextBox @bind-Text="p_objNguoi_Nhiem_Benh.Email" />
+                                    </Template>
+                                </DxFormLayoutItem>
+                                <DxFormLayoutItem Caption="Bệnh nhiễm" Context="FormLayoutContext" ColSpanMd="12">
+                                    <Template>
+                                        <DxComboBox @bind-Value="p_objNguoi_Nhiem_Benh.ID_Loai_Benh" FilteringMode="DataGridFilteringMode.Contains"
+                                                    Data="p_arrLoai_Benh" ValueFieldName="Auto_ID" TextFieldName="Ten_Loai_Benh" />
+                                    </Template>
+                                </DxFormLayoutItem>
+                                <DxFormLayoutItem Caption="Cấp độ" Context="FormLayoutContext" ColSpanMd="12">
+                                    <Template>
+                                        <DxComboBox @bind-Value="p_objNguoi_Nhiem_Benh.ID_Phan_Loai_Nhiem" FilteringMode="DataGridFilteringMode.Contains"
+                                                    Data="p_arrPhan_Loai_Nhiem" ValueFieldName="Auto_ID" TextFieldName="Ten_Loai_Nhiem" />
+                                    </Template>
+                                </DxFormLayoutItem>
+                                <DxFormLayoutItem Caption="Xác nhận" Context="FormLayoutContext" ColSpanMd="12">
+                                    <Template>
+                                        <DxCheckBox @bind-Checked="p_objNguoi_Nhiem_Benh.Xac_Nhan" />
+                                    </Template>
+                                </DxFormLayoutItem>
+                                <DxFormLayoutItem Context="FormLayoutContext" ColSpanMd="12">
+                                    <Template>
+                                        <div class="text-right">
+                                            <DxButton RenderStyle="ButtonRenderStyle.Link" SubmitFormOnClick="true" Text="Update" />
+                                            <DxButton RenderStyle="ButtonRenderStyle.Link" Click="OnCancelButtonClick_Nguoi_Nhiem_Benh" Text="Cancel" />
+                                        </div>
+                                    </Template>
+                                </DxFormLayoutItem>
+                            </DxFormLayout>
+                        </EditForm>
+                    </EditFormTemplate>
+                </DxDataGrid>
+            }
+        </div>
+    </div>
+}

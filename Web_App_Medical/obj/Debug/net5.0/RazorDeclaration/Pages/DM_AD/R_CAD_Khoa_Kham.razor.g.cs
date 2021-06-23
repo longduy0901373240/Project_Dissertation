@@ -97,19 +97,27 @@ using Microsoft.AspNetCore.Hosting;
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\Pages\DM_AD\R_CAD_Khoa_Kham.razor"
+#line 14 "D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\_Imports.razor"
+using Blazored.LocalStorage;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\Pages\DM_AD\R_CAD_Khoa_Kham.razor"
 using Controller.DM_AD;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\Pages\DM_AD\R_CAD_Khoa_Kham.razor"
+#line 6 "D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\Pages\DM_AD\R_CAD_Khoa_Kham.razor"
 using Entity.DM_AD;
 
 #line default
 #line hidden
 #nullable disable
+    [Microsoft.AspNetCore.Components.LayoutAttribute(typeof(AdminLayout))]
     [Microsoft.AspNetCore.Components.RouteAttribute("/danh_muc_ad/Khoa_Kham")]
     public partial class R_CAD_Khoa_Kham : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -118,6 +126,7 @@ using Entity.DM_AD;
         {
         }
         #pragma warning restore 1998
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private ILocalStorageService iLocalStorage { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IWebHostEnvironment env { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime IJS { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Khoa_Kham_Controller _db_Khoa_Kham { get; set; }

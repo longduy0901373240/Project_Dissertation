@@ -5,6 +5,11 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="ml-3 font-weight-bold title pr-4">Web_App_Medical</div>
+    <div class="col">
+        <div class="float-right">
+            <DxButton Click="Event_Login" Text="LogIn"/>
+        </div>
+    </div>
 </nav>
 
 @code {
@@ -58,5 +63,9 @@
     public void Dispose()
     {
         NavigationManager.LocationChanged -= OnLocationChanged;
+    }
+    private void Event_Login()
+    {
+        NavigationManager.NavigateTo("/admin/sign_in");
     }
 }

@@ -1,0 +1,82 @@
+﻿@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService iLocalStorage
+<nav class="navbar header-navbar p-0">
+    <button class="navbar-toggler bg-primary d-block" @onclick="OnToggleClick">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="ml-3 font-weight-bold title pr-4">Web_App_Medical</div>
+    <div class="col">
+        <div class="col-1 float-right">
+            <DxButton Text="Sign Out" Click="Event_Sign_Out"/>
+        </div>
+        <div class="float-right">
+            <h4>@p_strSessionValue</h4>
+        </div>
+    </div>
+</nav>
+
+@code {
+    private string p_strSessionValue = "";
+    bool isDesktop = true, isToggled = true, isInitialized;
+
+    [Parameter] public string StateCssClass { get; set; }
+    [Parameter] public EventCallback<string> StateCssClassChanged { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        p_strSessionValue = await iLocalStorage.GetItemAsync<string>("SessionValue");
+    }
+
+    protected override void OnInitialized()
+    {
+        NavigationManager.LocationChanged += OnLocationChanged;
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+            await JSRuntime.InvokeVoidAsync("windowMinWidthMatchesQuery", DotNetObjectReference.Create(this));
+        isInitialized = true;
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+    [JSInvokable]
+    public async Task OnWindowMinWidthQueryChanged(bool matchesDesktop)
+    {
+
+        if (!isInitialized || isDesktop != matchesDesktop)
+        {
+            isDesktop = matchesDesktop;
+            if (isInitialized || !isDesktop)
+                await ToggleNavMenu(matchesDesktop);
+        }
+    }
+    async Task OnToggleClick() => await ToggleNavMenu();
+
+    async void OnLocationChanged(object sender, LocationChangedEventArgs args)
+    {
+        if (!isDesktop)
+            await ToggleNavMenu(false);
+    }
+
+    async Task ToggleNavMenu(bool? value = null)
+    {
+        var newValue = value ?? !isToggled;
+        isToggled = value ?? !isToggled;
+        string stateCssClass = isToggled ? "expand" : "collapse";
+        if (StateCssClass != stateCssClass)
+        {
+            StateCssClass = stateCssClass;
+            await StateCssClassChanged.InvokeAsync(StateCssClass);
+        }
+    }
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= OnLocationChanged;
+    }
+    private async void Event_Sign_Out()
+    {
+        p_strSessionValue = "";
+        await iLocalStorage.SetItemAsync("SessionValue", p_strSessionValue);
+        NavigationManager.NavigateTo("/admin/sign_in");
+    }
+}
