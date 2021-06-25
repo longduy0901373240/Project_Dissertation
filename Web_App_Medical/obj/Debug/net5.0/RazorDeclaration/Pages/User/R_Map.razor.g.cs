@@ -4,7 +4,7 @@
 #pragma warning disable 0649
 #pragma warning disable 0169
 
-namespace Web_App_Medical.Pages.Dashboard
+namespace Web_App_Medical.Pages.User
 {
     #line hidden
     using System;
@@ -104,21 +104,22 @@ using Blazored.LocalStorage;
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\Pages\Dashboard\R_Map_Direct_Benh_Vien.razor"
+#line 5 "D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\Pages\User\R_Map.razor"
 using Controller.DM_AD;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\Pages\Dashboard\R_Map_Direct_Benh_Vien.razor"
-using Entity.DM_AD;
+#line 6 "D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\Pages\User\R_Map.razor"
+using Controller.DM_NN_AD;
 
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/dashboard/map_direct_benh_vien")]
-    public partial class R_Map_Direct_Benh_Vien : Microsoft.AspNetCore.Components.ComponentBase
+    [Microsoft.AspNetCore.Components.LayoutAttribute(typeof(MainLayout))]
+    [Microsoft.AspNetCore.Components.RouteAttribute("/user/map")]
+    public partial class R_Map : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -126,12 +127,10 @@ using Entity.DM_AD;
         }
         #pragma warning restore 1998
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime IJS { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Benh_Vien_Controller _db_Benh_Vien { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Khoa_Kham_Benh_Vien_Controller _db_Khoa_Kham_Benh_vien { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Khoa_Kham_Controller _db_Khoa_Kham { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Nguoi_Nhiem_Benh_Controller _db_Nguoi_Nhiem_Benh { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Dia_Chi_Nguoi_Nhiem_Benh_Controller _db_Dia_Chi_Nguoi_Nhiem_Benh { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Dia_Chi_Benh_Vien_Controller _db_Dia_Chi_Benh_Vien { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Dia_Chi_Controller _db_Dia_Chi { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Quan_Controller _db_Quan { get; set; }
     }
 }
 #pragma warning restore 1591

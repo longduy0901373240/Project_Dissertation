@@ -1,0 +1,65 @@
+﻿@layout MainLayout
+
+@page "/user/map"
+
+@using Controller.DM_AD
+@using Controller.DM_NN_AD
+
+@inject CAD_Dia_Chi_Controller _db_Dia_Chi
+@inject CAD_Dia_Chi_Benh_Vien_Controller _db_Dia_Chi_Benh_Vien
+@inject CAD_Dia_Chi_Nguoi_Nhiem_Benh_Controller _db_Dia_Chi_Nguoi_Nhiem_Benh
+@inject CAD_Nguoi_Nhiem_Benh_Controller _db_Nguoi_Nhiem_Benh
+
+@inject IJSRuntime IJS
+
+<div class="row">
+    <div class="col-md-12">
+        <DxFormLayout>
+            <DxFormLayoutItem Caption="All" Context="FormLayoutContext" ColSpanMd="4">
+                <Template>
+                    <DxCheckBox Checked="@p_blCheck_Box_All" CheckedChanged="@((bool item) => EvenCheckBox_All(item) )" />
+                </Template>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Bệnh viện" Context="FormLayoutContext" ColSpanMd="4">
+                <Template>
+                    <DxCheckBox Checked="@p_blCheck_Box_Benh_Vien" CheckedChanged="@((bool item)=>EvenCheckBox_Benh_Vien(item))" />
+                </Template>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Người nhiểm" Context="FormLayoutContext" ColSpanMd="4">
+                <Template>
+                    <DxCheckBox Checked="@p_blCheck_Box_Nguoi_Nhiem" CheckedChanged="@((bool item)=>EvenCheckBox_Nguoi_Nhiem(item))" />
+                </Template>
+            </DxFormLayoutItem>
+        </DxFormLayout>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <DxFormLayout>
+            <DxFormLayoutItem Caption="Vị trí bản thân" Context="FormLayoutContext" ColSpanMd="6">
+                <Template>
+                    <input id="Search_Address_User" class="form-control form-control-sm dxbs-form-control text-truncate" autocomplete="on" @bind-value="@p_strAddress_User" />
+                </Template>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Context="FormLayoutContext" ColSpanMd="6">
+                <Template>
+                    <DxButton Click="@Submit" Text="Submit" />
+                </Template>
+            </DxFormLayoutItem>
+        </DxFormLayout>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <p>@p_strAddress_User</p>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <div id="map"></div>
+    </div>
+</div>
+

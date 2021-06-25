@@ -91,10 +91,6 @@ D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net
 D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\Razor\Pages\DM_AD\R_CAD_Quan.razor.g.cs
 D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\RazorDeclaration\Pages\DM_AD\R_CAD_Thong_Tin_Chi_Tiet_Benh_Vien.razor.g.cs
 D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\Razor\Pages\DM_AD\R_CAD_Thong_Tin_Chi_Tiet_Benh_Vien.razor.g.cs
-D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\RazorDeclaration\Pages\Dashboard\R_Map.razor.g.cs
-D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\Razor\Pages\Dashboard\R_Map.razor.g.cs
-D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\RazorDeclaration\Pages\Dashboard\R_Map_Direct_Benh_Vien.razor.g.cs
-D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\Razor\Pages\Dashboard\R_Map_Direct_Benh_Vien.razor.g.cs
 D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\RazorDeclaration\Shared\AdminHeader.razor.g.cs
 D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\RazorDeclaration\Shared\AdminLayout.razor.g.cs
 D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\RazorDeclaration\Shared\AdminNavMenu.razor.g.cs
@@ -113,3 +109,9 @@ D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net
 D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\Razor\Pages\DM_NN_AD\R_CAD_Phan_Loai_Nhiem.razor.g.cs
 D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\RazorDeclaration\Pages\DM_NN_AD\R_CAD_Nguoi_Nhiem_Benh.razor.g.cs
 D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\Razor\Pages\DM_NN_AD\R_CAD_Nguoi_Nhiem_Benh.razor.g.cs
+D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\RazorDeclaration\Pages\User\R_Map.razor.g.cs
+D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\RazorDeclaration\Pages\User\R_Map_Direct_Benh_Vien.razor.g.cs
+D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\Razor\Pages\User\R_Map.razor.g.cs
+D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\Razor\Pages\User\R_Map_Direct_Benh_Vien.razor.g.cs
+D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\RazorDeclaration\Pages\User\R_Khai_Bao_Nguoi_Nhiem.razor.g.cs
+D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\obj\Debug\net5.0\Razor\Pages\User\R_Khai_Bao_Nguoi_Nhiem.razor.g.cs

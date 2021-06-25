@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Web_App_Medical.Pages.Dashboard
+namespace Web_App_Medical.Pages.User
 {
     public partial class R_Map_Direct_Benh_Vien
     {
@@ -208,7 +208,7 @@ namespace Web_App_Medical.Pages.Dashboard
 
         async void Submit(MouseEventArgs args)
         {
-            await IJS.InvokeVoidAsync("point_Start_End",p_strAddress_User,p_objAddress_Hospital);
+            await IJS.InvokeVoidAsync("point_Start_End", p_strAddress_User, p_objAddress_Hospital);
         }
         #endregion
     }

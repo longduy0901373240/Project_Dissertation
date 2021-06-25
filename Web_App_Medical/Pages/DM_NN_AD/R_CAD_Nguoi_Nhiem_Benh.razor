@@ -36,6 +36,7 @@ else
             {
                 <DxDataGrid Data="p_arrNguoi_Nhiem_Benh" EditMode="DataGridEditMode.PopupEditForm"
                             @ref="_Grid_Nguoi_Nhiem_Benh"
+                            ShowFilterRow="true"
                             RowRemoving="@OnRowDeleting_Nguoi_Nhiem_Benh"
                             RowInsertStart="@(()=>OnRowStarting_Nguoi_Nhiem_Benh(null))"
                             RowEditStart="@((Item)=>OnRowStarting_Nguoi_Nhiem_Benh(Item))"

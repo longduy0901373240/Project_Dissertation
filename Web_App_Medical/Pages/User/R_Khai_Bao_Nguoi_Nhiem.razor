@@ -1,0 +1,169 @@
+﻿@layout MainLayout
+
+@page "/user/khai_bao_nguoi_nhiem"
+
+@using Entity.DM_AD
+@using Controller.DM_NN_AD
+@using Controller.DM_AD
+
+@inject CAD_Loai_Benh_Controller _db_Loai_Benh
+@inject CAD_Phan_Loai_Nhiem_Controller _db_Phan_Loai_Nhiem
+@inject CAD_Nguoi_Nhiem_Benh_Controller _db_Nguoi_Nhiem_Benh
+@inject CAD_Dia_Chi_Controller _db_Dia_chi
+@inject CAD_Dia_Chi_Nguoi_Nhiem_Benh_Controller _db_Dia_Chi_Nguoi_Nhiem_Benh
+
+@inject IJSRuntime IJS
+@inject NavigationManager nav
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Khai báo thông tin người nhiễm bệnh</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <DxFormLayout>
+            <DxFormLayoutItem Caption="Tên người nhiểm" Context="FormLayoutContext" ColSpanMd="12">
+                <Template>
+                    <DxTextBox @bind-Text="@p_objNguoi_Nhiem_Benh.Ten_Nguoi_Nhiem" />
+                </Template>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Ngày sinh" Context="FormLayoutContext" ColSpanMd="12">
+                <Template>
+                    <DxDateEdit @bind-Date="@p_objNguoi_Nhiem_Benh.Ngay_Sinh" />
+                </Template>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Số điện thoại" Context="FormLayoutContext" ColSpanMd="12">
+                <Template>
+                    <DxTextBox @bind-Text="@p_objNguoi_Nhiem_Benh.SDT" />
+                </Template>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Email" Context="FormLayoutContext" ColSpanMd="12">
+                <Template>
+                    <DxTextBox @bind-Text="@p_objNguoi_Nhiem_Benh.Email" />
+                </Template>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Loại bệnh truyền nhiểm" Context="FormLayoutContext" ColSpanMd="12">
+                <Template>
+                    <DxComboBox @bind-Value="@p_objNguoi_Nhiem_Benh.ID_Loai_Benh" FilteringMode="DataGridFilteringMode.Contains"
+                                Data="p_arr_Loai_Benh" TextFieldName="Ten_Loai_Benh" ValueFieldName="Auto_ID" />
+                </Template>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Cấp độ nhiễm" Context="FormLayoutContext" ColSpanMd="12">
+                <Template>
+                    <DxComboBox @bind-Value="@p_objNguoi_Nhiem_Benh.ID_Phan_Loai_Nhiem" FilteringMode="DataGridFilteringMode.Contains"
+                                Data="p_arrPhan_Loai_Nhiem" TextFieldName="Ten_Loai_Nhiem" ValueFieldName="Auto_ID" />
+                </Template>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Ghi chú triệu chứng" Context="FormLayoutContext" ColSpanMd="12">
+                <Template>
+                    <DxMemo @bind-Text="@p_objNguoi_Nhiem_Benh.Ghi_Chu"/>
+                </Template>
+            </DxFormLayoutItem>
+        </DxFormLayout>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h3>Khai báo thông tin điểm đi</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <DxFormLayout>
+            <DxFormLayoutItem Caption="Địa điểm từng đến" Context="FormLayoutContext" ColSpanMd="12">
+                <Template>
+                    <input id="Search_Address_User" class="form-control form-control-sm dxbs-form-control text-truncate" autocomplete="on" @bind-value="@p_strAddress_User" />
+                </Template>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Context="FormLayoutContext" ColSpanMd="6">
+                <Template>
+                    <DxButton Click="@Submit" Text="Submit" />
+                </Template>
+            </DxFormLayoutItem>
+        </DxFormLayout>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8" id="map">
+        </div>
+        <div class="col-sm-4">
+            <p><h4>Thông tin vị trí</h4></p>
+            <DxFormLayout>
+                <DxFormLayoutItem Caption="Address" Context="FormLayoutContext" ColSpanMd="12">
+                    <Template>
+                        <input id="Address_Vi_Tri_Nguoi_Nhiem" class="form-control form-control-sm dxbs-form-control text-truncate" readonly/>
+                    </Template>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="Latitude" Context="FormLayoutContext" ColSpanMd="12">
+                    <Template>
+                        <input id="Lat_Vi_Tri_Nguoi_Nhiem" class="form-control form-control-sm dxbs-form-control text-truncate" readonly/>
+                    </Template>
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="Longitude" Context="FormLayoutContext" ColSpanMd="12">
+                    <Template>
+                        <input id="Lng_Vi_Tri_Nguoi_Nhiem" class="form-control form-control-sm dxbs-form-control text-truncate" readonly/>
+                    </Template>
+                </DxFormLayoutItem>
+            </DxFormLayout>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <DxDataGrid Data="p_arrVi_tri_Nguoi_Nhiem" EditMode="DataGridEditMode.PopupEditForm"
+                    @ref="_Grid_Dia_Chi_Nguoi_Nhiem"
+                    RowRemoving="@OnRowDeleting"
+                    RowInsertStart="@(()=>OnRowStarting(null))"
+                    RowEditStart="@((Item)=>OnRowStarting(Item))">
+            <Columns>
+                <DxDataGridCommandColumn Width="150px" />
+                <DxDataGridColumn Caption="Địa chỉ" Field="@nameof(CAD_Dia_Chi.Dia_Chi)"/>
+                <DxDataGridColumn Caption="Latitude" Field="@nameof(CAD_Dia_Chi.Lat)"/>
+                <DxDataGridColumn Caption="Longitude" Field="@nameof(CAD_Dia_Chi.Lng)"/>
+            </Columns>
+            <EditFormTemplate>
+                <EditForm Model="@p_objThong_Tin_Dia_Chi" Context="EditFormContext" OnValidSubmit="HandleValiSubmit">
+                    <DxFormLayout>
+                        <DxFormLayoutItem Caption="Địa chỉ" Context="FormLayoutContext" ColSpanMd="12">
+                            <Template>
+                                <DxTextBox @bind-Text="p_objThong_Tin_Dia_Chi.Dia_Chi" />
+                            </Template>
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Latitude" Context="FormLayoutContext" ColSpanMd="12">
+                            <Template>
+                                <DxTextBox @bind-Text="p_objThong_Tin_Dia_Chi.Lat" />
+                            </Template>
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Longitude" Context="FormLayoutContext" ColSpanMd="12">
+                            <Template>
+                                <DxTextBox @bind-Text="p_objThong_Tin_Dia_Chi.Lng" />
+                            </Template>
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Context="chilFormLayoutContext" ColSpanMd="12">
+                            <Template>
+                                <div class="text-right">
+                                    <DxButton RenderStyle="ButtonRenderStyle.Link" SubmitFormOnClick="true" Text="Update" />
+                                    <DxButton RenderStyle="ButtonRenderStyle.Link" Click="OnCancelButtonClick" Text="Cancel" />
+                                </div>
+                            </Template>
+                        </DxFormLayoutItem>
+                    </DxFormLayout>
+                </EditForm>
+            </EditFormTemplate>
+        </DxDataGrid>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <DxFormLayout>
+            <DxFormLayoutItem>
+                <Template>
+                    <DxButton Click="Add_Data" Text="Xác Nhận"></DxButton>
+                </Template>
+            </DxFormLayoutItem>
+        </DxFormLayout>
+    </div>
+</div>
