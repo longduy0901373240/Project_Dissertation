@@ -1,6 +1,7 @@
 using Blazored.LocalStorage;
 using Controller.DM_AD;
 using Controller.DM_NN_AD;
+using Controller.DM_VN_AD;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -40,6 +41,9 @@ namespace Web_App_Medical
             services.AddSingleton<CAD_Phan_Loai_Nhiem_Controller>();
             services.AddSingleton<CAD_Nguoi_Nhiem_Benh_Controller>();
             services.AddSingleton<CAD_Dia_Chi_Nguoi_Nhiem_Benh_Controller>();
+
+            services.AddSingleton<CAD_Vung_Cach_Ly_Controller>();
+            services.AddSingleton<CAD_Diem_Cach_Ly_Controller>();
 
             services.AddHttpContextAccessor();
 

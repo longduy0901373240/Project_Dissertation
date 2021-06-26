@@ -117,6 +117,13 @@ using Controller.DM_NN_AD;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 7 "D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\Pages\User\R_Map.razor"
+using Controller.DM_VN_AD;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.LayoutAttribute(typeof(MainLayout))]
     [Microsoft.AspNetCore.Components.RouteAttribute("/user/map")]
     public partial class R_Map : Microsoft.AspNetCore.Components.ComponentBase
@@ -127,6 +134,7 @@ using Controller.DM_NN_AD;
         }
         #pragma warning restore 1998
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime IJS { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Diem_Cach_Ly_Controller _db_Diem_Cach_Ly { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Nguoi_Nhiem_Benh_Controller _db_Nguoi_Nhiem_Benh { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Dia_Chi_Nguoi_Nhiem_Benh_Controller _db_Dia_Chi_Nguoi_Nhiem_Benh { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Dia_Chi_Benh_Vien_Controller _db_Dia_Chi_Benh_Vien { get; set; }

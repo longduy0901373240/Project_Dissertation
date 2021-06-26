@@ -1,0 +1,99 @@
+﻿@layout AdminLayout
+
+@page "/danh_muc_vung_nhiem_ad/vung_cach_ly"
+
+@using Controller.DM_VN_AD
+@using Entity.DM_VN_AD
+
+@inject CAD_Vung_Cach_Ly_Controller _db_Vung_Cach_Ly
+
+@inject IJSRuntime IJS
+@inject IWebHostEnvironment env
+@inject ILocalStorageService iLocalStorage
+
+@if (p_strSessionValue == "")
+{
+    <p>Bạn cần đăng nhập để thực hiện chức năng</p>
+}
+else
+{
+    <h3>Hiển thị thông tin của các vùng cách ly</h3>
+    <h4>Bảng thông tin các vùng cách ly</h4>
+    <div class="row">
+        <div class="col-md-12">
+            <DxFormLayout>
+                <DxFormLayoutGroup Caption="Import Excel" ColSpanMd="12">
+                    <DxFormLayoutItem Context="FormLayoutImportExcelContext" ColSpanMd="6">
+                        <Template>
+                            <InputFile class="btn btn-sm dx-btn  btn-primary" OnChange="OnInputFileChange" id="InputFile_Custom" />
+                        </Template>
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Context="FormLayoutImportExcelContext" ColSpanMd="3">
+                        <Template>
+                            <DxButton Text="Submit" @onclick="Import_Excel" />
+                        </Template>
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Context="FormLayoutImportExcelContext" ColSpanMd="3">
+                        <Template>
+                            <a href="/FileManagement/Template/Template_Vung_Cach_Ly.xlsx" download="Template_Vung_Cach_Ly.xlsx">
+                                <DxButton Text="Download Template" />
+                            </a>
+                        </Template>
+                    </DxFormLayoutItem>
+                </DxFormLayoutGroup>
+            </DxFormLayout>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @if (p_arrVung_Cach_Ly == null)
+            {
+                <p><em>Loading...</em></p>
+            }
+            else
+            {
+                <DxDataGrid Data="p_arrVung_Cach_Ly" EditMode="DataGridEditMode.PopupEditForm"
+                            @ref="_Grid_Vung_Cach_Ly"
+                            RowRemoving="@OnRowDeleting"
+                            RowInsertStart="@(() => OnRowStarting(null))"
+                            RowEditStart="@((Item) => OnRowStarting(Item))">
+                    <Columns>
+                        <DxDataGridCommandColumn Width="150px" />
+                        <DxDataGridColumn Caption="Tên vùng" Field="@nameof(CAD_Vung_Cach_Ly.Ten_Vung)" />
+                        <DxDataGridColumn Caption="Latitude" Field="@nameof(CAD_Vung_Cach_Ly.Lat)" />
+                        <DxDataGridColumn Caption="Longitude" Field="@nameof(CAD_Vung_Cach_Ly.Lng)" />
+                    </Columns>
+                    <EditFormTemplate>
+                        <EditForm Model="p_objVung_Cach_Ly" Context="EditFormContext" OnValidSubmit="@HandleValiSubmit">
+                            <DxFormLayout>
+                                <DxFormLayoutItem Caption="Tên vùng" Context="FormLayoutContext" ColSpanMd="12">
+                                    <Template>
+                                        <DxTextBox @bind-Text="p_objVung_Cach_Ly.Ten_Vung" />
+                                    </Template>
+                                </DxFormLayoutItem>
+                                <DxFormLayoutItem Caption="Latitude" Context="FormLayoutContext" ColSpanMd="12">
+                                    <Template>
+                                        <DxTextBox @bind-Text="p_objVung_Cach_Ly.Lat" />
+                                    </Template>
+                                </DxFormLayoutItem>
+                                <DxFormLayoutItem Caption="Longitude" Context="FormLayoutContext" ColSpanMd="12">
+                                    <Template>
+                                        <DxTextBox @bind-Text="p_objVung_Cach_Ly.Lng" />
+                                    </Template>
+                                </DxFormLayoutItem>
+                                <DxFormLayoutItem Context="FormLayoutContext" ColSpanMd="12">
+                                    <Template>
+                                        <div class="text-right">
+                                            <DxButton RenderStyle="ButtonRenderStyle.Link" SubmitFormOnClick="true" Text="Update" />
+                                            <DxButton RenderStyle="ButtonRenderStyle.Link" Click="OnCancelButtonClick" Text="Cancel" />
+                                        </div>
+                                    </Template>
+                                </DxFormLayoutItem>
+                            </DxFormLayout>
+                        </EditForm>
+                    </EditFormTemplate>
+                </DxDataGrid>
+            }
+        </div>
+    </div>
+}
