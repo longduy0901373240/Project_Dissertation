@@ -13,6 +13,7 @@
     <Folder Include="wwwroot\FileManagement\Upload\" />
     <Folder Include="wwwroot\FileManagement\Template\" />
     <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\Icon\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Controller\Controller.csproj" />

@@ -104,43 +104,31 @@ using Blazored.LocalStorage;
 #line hidden
 #nullable disable
 #nullable restore
-#line 5 "D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\Pages\User\R_Khai_Bao_Nguoi_Nhiem.razor"
-using Entity.DM_AD;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 6 "D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\Pages\User\R_Khai_Bao_Nguoi_Nhiem.razor"
+#line 5 "D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\Pages\User\R_Charts.razor"
 using Controller.DM_NN_AD;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 7 "D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\Pages\User\R_Khai_Bao_Nguoi_Nhiem.razor"
+#line 6 "D:\School\Luận Văn\Project\Project_Dissertation\Web_App_Medical\Pages\User\R_Charts.razor"
 using Controller.DM_AD;
 
 #line default
 #line hidden
 #nullable disable
     [Microsoft.AspNetCore.Components.LayoutAttribute(typeof(MainLayout))]
-    [Microsoft.AspNetCore.Components.RouteAttribute("/user/khai_bao_nguoi_nhiem")]
-    public partial class R_Khai_Bao_Nguoi_Nhiem : Microsoft.AspNetCore.Components.ComponentBase
+    [Microsoft.AspNetCore.Components.RouteAttribute("/user/chart")]
+    public partial class R_Charts : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
         {
         }
         #pragma warning restore 1998
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager nav { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime IJS { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Dia_Chi_Controller _db_Dia_Chi { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Quan_Controller _db_Quan { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Dia_Chi_Nguoi_Nhiem_Benh_Controller _db_Dia_Chi_Nguoi_Nhiem_Benh { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Dia_Chi_Controller _db_Dia_chi { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Nguoi_Nhiem_Benh_Controller _db_Nguoi_Nhiem_Benh { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Phan_Loai_Nhiem_Controller _db_Phan_Loai_Nhiem { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Loai_Benh_Controller _db_Loai_Benh { get; set; }
     }
 }
 #pragma warning restore 1591

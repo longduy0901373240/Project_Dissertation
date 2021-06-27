@@ -132,5 +132,32 @@ namespace Controller.DM_VN_AD
 				throw ex;
 			}
 		}
-	}
+
+        #region Customize
+		public IList<String> F11_1_List_Ten_Vung()
+        {
+			IList<string> v_arrRes = new List<string>();
+			DataTable v_dt = new DataTable();
+            try
+            {
+				CSqlHelper.FillDataTable(CConfig.g_strLuan_Van_Data_Conn_String, v_dt, "F11_1_sp_sel_List_Ten_Vung");
+                foreach (DataRow v_row in v_dt.Rows)
+                {
+					string v_objRes = CUtility.Convert_To_String(v_row.ItemArray[0]);
+					v_arrRes.Add(v_objRes);
+                }
+			}
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+				v_dt.Dispose();
+            }
+			return v_arrRes;
+        }
+        #endregion
+    }
 }

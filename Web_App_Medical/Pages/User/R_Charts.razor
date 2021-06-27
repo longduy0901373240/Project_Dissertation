@@ -1,0 +1,24 @@
+﻿@layout MainLayout
+
+@page "/user/chart"
+
+@using Controller.DM_NN_AD
+@using Controller.DM_AD
+
+@inject CAD_Dia_Chi_Nguoi_Nhiem_Benh_Controller _db_Dia_Chi_Nguoi_Nhiem_Benh
+@inject CAD_Quan_Controller _db_Quan
+@inject CAD_Dia_Chi_Controller _db_Dia_Chi
+
+<DxChart Data="p_arrThong_Khe">
+    <DxChartBarSeries Name="Ca nhiểm"
+                      T="Thong_Ke"
+                      TArgument="string"
+                      TValue="int"
+                      ArgumentField="si=>si.Quan"
+                      ValueField="si=>si.So_Ca_Nhiem"/>
+    <DxChartLegend Position="RelativePosition.Outside"
+                   HorizontalAlignment="HorizontalAlignment.Right"/>
+</DxChart>
+
+@code {
+}

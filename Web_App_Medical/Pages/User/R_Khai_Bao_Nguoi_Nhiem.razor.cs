@@ -21,6 +21,8 @@ namespace Web_App_Medical.Pages.User
 
         private IList<CAD_Dia_Chi> p_arrVi_tri_Nguoi_Nhiem = new List<CAD_Dia_Chi>();
 
+        private IList<CAD_Quan> p_arrQuan = new List<CAD_Quan>();
+
         private CAD_Nguoi_Nhiem_Benh p_objNguoi_Nhiem_Benh = new CAD_Nguoi_Nhiem_Benh();
 
         private CAD_Dia_Chi p_objThong_Tin_Dia_Chi;
@@ -38,6 +40,7 @@ namespace Web_App_Medical.Pages.User
         {
             p_arr_Loai_Benh = _db_Loai_Benh.List_AD_Loai_Benh();
             p_arrPhan_Loai_Nhiem = _db_Phan_Loai_Nhiem.List_AD_Phan_Loai_Nhiem();
+            p_arrQuan = _db_Quan.List_AD_Quan();
         }
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {

@@ -11,9 +11,15 @@
 @inject CAD_Dia_Chi_Nguoi_Nhiem_Benh_Controller _db_Dia_Chi_Nguoi_Nhiem_Benh
 @inject CAD_Nguoi_Nhiem_Benh_Controller _db_Nguoi_Nhiem_Benh
 @inject CAD_Diem_Cach_Ly_Controller _db_Diem_Cach_Ly
+@inject CAD_Vung_Cach_Ly_Controller _db_Vung_Cach_Ly
 
 @inject IJSRuntime IJS
-
+<style>
+    #map{
+        height:100%;
+        width:100%;
+    }
+</style>
 <div class="row">
     <div class="col-md-12">
         <DxFormLayout>
@@ -32,9 +38,19 @@
                     <DxCheckBox Checked="@p_blCheck_Box_Nguoi_Nhiem" CheckedChanged="@((bool item)=>EvenCheckBox_Nguoi_Nhiem(item))" />
                 </Template>
             </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Người nghi nhiểm" Context="FormLayoutContext" ColSpanMd="4">
+                <Template>
+                    <DxCheckBox Checked="@p_blCheck_Box_Nguoi_Nghi_Nhiem" CheckedChanged="@((bool item)=>EvenCheckBox_Nguoi_Nghi_Nhiem(item))" />
+                </Template>
+            </DxFormLayoutItem>
             <DxFormLayoutItem Caption="Điểm nhiểm" Context="FormLayoutContext" ColSpanMd="4">
                 <Template>
                     <DxCheckBox Checked="@p_blCheck_Box_Diem_Cach_Ly" CheckedChanged="@((bool item)=>EvenCheckBox_Diem_Cach_Ly(item))" />
+                </Template>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Vùng nhiểm" Context="FormLayoutContext" ColSpanMd="4">
+                <Template>
+                    <DxCheckBox Checked="@p_blCheck_Box_Vung_Cach_Ly" CheckedChanged="@((bool item)=>EvenCheckBox_Vung_Cach_Ly(item))" />
                 </Template>
             </DxFormLayoutItem>
         </DxFormLayout>
@@ -58,15 +74,4 @@
     </div>
 </div>
 <br />
-<div class="row">
-    <div class="col-md-12">
-        <p>@p_strAddress_User</p>
-    </div>
-</div>
-<br />
-<div class="row">
-    <div class="col-md-12">
-        <div id="map"></div>
-    </div>
-</div>
-
+<div id="map" class="mw-100"></div>

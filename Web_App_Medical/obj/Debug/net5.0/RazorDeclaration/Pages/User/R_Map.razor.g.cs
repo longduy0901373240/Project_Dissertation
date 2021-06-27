@@ -134,6 +134,7 @@ using Controller.DM_VN_AD;
         }
         #pragma warning restore 1998
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime IJS { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Vung_Cach_Ly_Controller _db_Vung_Cach_Ly { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Diem_Cach_Ly_Controller _db_Diem_Cach_Ly { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Nguoi_Nhiem_Benh_Controller _db_Nguoi_Nhiem_Benh { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private CAD_Dia_Chi_Nguoi_Nhiem_Benh_Controller _db_Dia_Chi_Nguoi_Nhiem_Benh { get; set; }

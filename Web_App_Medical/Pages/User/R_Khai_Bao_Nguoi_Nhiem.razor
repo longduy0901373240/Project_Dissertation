@@ -11,13 +11,14 @@
 @inject CAD_Nguoi_Nhiem_Benh_Controller _db_Nguoi_Nhiem_Benh
 @inject CAD_Dia_Chi_Controller _db_Dia_chi
 @inject CAD_Dia_Chi_Nguoi_Nhiem_Benh_Controller _db_Dia_Chi_Nguoi_Nhiem_Benh
+@inject CAD_Quan_Controller _db_Quan
 
 @inject IJSRuntime IJS
 @inject NavigationManager nav
 
 <div class="row">
     <div class="col-md-12">
-        <h3>Khai báo thông tin người nhiễm bệnh</h3>
+        <h3>Khai báo thông tin người từ khu vực nhiễm bệnh</h3>
     </div>
 </div>
 <div class="row">
@@ -41,18 +42,6 @@
             <DxFormLayoutItem Caption="Email" Context="FormLayoutContext" ColSpanMd="12">
                 <Template>
                     <DxTextBox @bind-Text="@p_objNguoi_Nhiem_Benh.Email" />
-                </Template>
-            </DxFormLayoutItem>
-            <DxFormLayoutItem Caption="Loại bệnh truyền nhiểm" Context="FormLayoutContext" ColSpanMd="12">
-                <Template>
-                    <DxComboBox @bind-Value="@p_objNguoi_Nhiem_Benh.ID_Loai_Benh" FilteringMode="DataGridFilteringMode.Contains"
-                                Data="p_arr_Loai_Benh" TextFieldName="Ten_Loai_Benh" ValueFieldName="Auto_ID" />
-                </Template>
-            </DxFormLayoutItem>
-            <DxFormLayoutItem Caption="Cấp độ nhiễm" Context="FormLayoutContext" ColSpanMd="12">
-                <Template>
-                    <DxComboBox @bind-Value="@p_objNguoi_Nhiem_Benh.ID_Phan_Loai_Nhiem" FilteringMode="DataGridFilteringMode.Contains"
-                                Data="p_arrPhan_Loai_Nhiem" TextFieldName="Ten_Loai_Nhiem" ValueFieldName="Auto_ID" />
                 </Template>
             </DxFormLayoutItem>
             <DxFormLayoutItem Caption="Ghi chú triệu chứng" Context="FormLayoutContext" ColSpanMd="12">
@@ -140,6 +129,12 @@
                         <DxFormLayoutItem Caption="Longitude" Context="FormLayoutContext" ColSpanMd="12">
                             <Template>
                                 <DxTextBox @bind-Text="p_objThong_Tin_Dia_Chi.Lng" />
+                            </Template>
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Tên quận" Context="FormLayoutContext" ColSpanMd="12">
+                            <Template>
+                                <DxComboBox @bind-Value="p_objThong_Tin_Dia_Chi.Quan_ID" FilteringMode="DataGridFilteringMode.Contains"
+                                            Data="p_arrQuan" ValueFieldName="Auto_ID" TextFieldName="Ten_Quan" />
                             </Template>
                         </DxFormLayoutItem>
                         <DxFormLayoutItem Context="chilFormLayoutContext" ColSpanMd="12">

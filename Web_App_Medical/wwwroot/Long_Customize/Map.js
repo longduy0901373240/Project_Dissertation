@@ -4,49 +4,8 @@ var p_lng_Vi_Tri_Nguoi_Nhiem;
 function initMap() {
     p_map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: 10.776530, lng: 106.700980 },
-        zoom: 10,
+        zoom: 13
     });
-    const triangleCoords = [
-        { lat: 10.82673338187152, lng: 106.700048612626503},
-        { lat: 10.827330121812841, lng: 106.700781999550401},
-        { lat: 10.82800188078995, lng: 106.700141248555497},
-        { lat: 10.82865705612633, lng: 106.699601538189896},
-        { lat: 10.830126668180769, lng: 106.699511901215999},
-        { lat: 10.83047482565865, lng: 106.697751871632406},
-        { lat: 10.83033306507614, lng: 106.695182229683397},
-        { lat: 10.82967966382043, lng: 106.692762880184802},
-        { lat: 10.830690575348349, lng: 106.691675352528506},
-        { lat: 10.83567743547288, lng: 106.690615146039903},
-        { lat: 10.838385192515609, lng: 106.688189280450601},
-        { lat: 10.837424463364391, lng: 106.687218550548096},
-        { lat: 10.83656464358179, lng: 106.687042542150294},
-        { lat: 10.835674355594699, lng: 106.684700698514703},
-        { lat: 10.834456862107411, lng: 106.684023253235296},
-        { lat: 10.83050732281707, lng: 106.677866520265994},
-        { lat: 10.826243808917271, lng: 106.679789685929194},
-        { lat: 10.820954726692531, lng: 106.678761789572405},
-        { lat: 10.81423715067721, lng: 106.678931360263704},
-        { lat: 10.81789590577848, lng: 106.685976554470898},
-        { lat: 10.819919137206471, lng: 106.687503255801005},
-        { lat: 10.820956166950101, lng: 106.689198110025899},
-        { lat: 10.8219990811823, lng: 106.693413744082605},
-        { lat: 10.82331898643373, lng: 106.698903487107501},
-        { lat: 10.82673338187152, lng: 106.700048612626503},
-];
-    //const triangleCoords = [
-    //    { lat: 25.774, lng: -80.19 },
-    //    { lat: 18.466, lng: -66.118 },
-    //    { lat: 32.321, lng: -64.757 },
-    //];
-    const bermudaTriangle = new google.maps.Polygon({
-        paths: triangleCoords,
-        strokeColor: "#FF0000",
-        strokeOpacity: 0.8,
-        strokeWeight: 3,
-        fillColor: "#FF0000",
-        fillOpacity: 0.35,
-    });
-    bermudaTriangle.setMap(p_map);
 }
 //--------------------------------------------------------------------------------------------
 function initAutocompleteAddress_User() {
@@ -147,11 +106,12 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, start, 
 }
 //--------------------------------------------------------------------------------------------
 let markers_All = [];
-function List_Marker_Address_All(p_arrAddress_Benh_Vien, p_arrAddress_Nguoi_Nhiem) {
+function List_Marker_Address_All(p_arrAddress_Benh_Vien, p_arrAddress_Nguoi_Nhiem, p_arrAddress_Nguoi_Nghi_Nhiem) {
     var arr_Benh_Vien = [];
     for (var i = 0; i < p_arrAddress_Benh_Vien.length; i++) {
         var item = {
-            position: new google.maps.LatLng(p_arrAddress_Benh_Vien[i].lat, p_arrAddress_Benh_Vien[i].lng)
+            position: new google.maps.LatLng(p_arrAddress_Benh_Vien[i].lat, p_arrAddress_Benh_Vien[i].lng),
+            icon: "/Icon/Benh_Vien.png"
         }
         arr_Benh_Vien.push(item);
     };
@@ -159,6 +119,7 @@ function List_Marker_Address_All(p_arrAddress_Benh_Vien, p_arrAddress_Nguoi_Nhie
         var marker = new google.maps.Marker({
             position: arr_Benh_Vien[i].position,
             category: 'Benh_Vien',
+            icon: arr_Benh_Vien[i].icon,
             map: map,
         });
         markers_All.push(marker);
@@ -166,7 +127,8 @@ function List_Marker_Address_All(p_arrAddress_Benh_Vien, p_arrAddress_Nguoi_Nhie
     var arr_Nguoi_Nhiem = [];
     for (var i = 0; i < p_arrAddress_Nguoi_Nhiem.length; i++) {
         var item = {
-            position: new google.maps.LatLng(p_arrAddress_Nguoi_Nhiem[i].lat, p_arrAddress_Nguoi_Nhiem[i].lng)
+            position: new google.maps.LatLng(p_arrAddress_Nguoi_Nhiem[i].lat, p_arrAddress_Nguoi_Nhiem[i].lng),
+            icon: "/Icon/Nguoi_Nhiem.png"
         }
         arr_Nguoi_Nhiem.push(item);
     };
@@ -174,7 +136,25 @@ function List_Marker_Address_All(p_arrAddress_Benh_Vien, p_arrAddress_Nguoi_Nhie
         var marker = new google.maps.Marker({
             position: arr_Nguoi_Nhiem[i].position,
             category: 'Nguoi_Nhiem',
+            icon: arr_Nguoi_Nhiem[i].icon,
             map:map,
+        });
+        markers_All.push(marker);
+    };
+    var arr_Nguoi_Nghi_Nhiem = [];
+    for (var i = 0; i < p_arrAddress_Nguoi_Nghi_Nhiem.length; i++) {
+        var item = {
+            position: new google.maps.LatLng(p_arrAddress_Nguoi_Nghi_Nhiem[i].lat, p_arrAddress_Nguoi_Nghi_Nhiem[i].lng),
+            icon: "/Icon/Nguoi_Nghi_Nhiem.png"
+        }
+        arr_Nguoi_Nghi_Nhiem.push(item);
+    };
+    for (var i = 0; i < arr_Nguoi_Nghi_Nhiem.length; i++) {
+        var marker = new google.maps.Marker({
+            position: arr_Nguoi_Nghi_Nhiem[i].position,
+            category: 'Nguoi_Nghi_Nhiem',
+            icon: arr_Nguoi_Nghi_Nhiem[i].icon,
+            map: map,
         });
         markers_All.push(marker);
     };
@@ -213,13 +193,25 @@ function Show_Markers_Nguoi_Nhiem() {
     var map = p_map;
     setMapOnAll_Nguoi_Nhiem(map);
 }
+function setMapOnAll_Nguoi_Nghi_Nhiem(p_objmap) {
+    for (var i = 0; i < markers_All.length; i++) {
+        if (markers_All[i].category == 'Nguoi_Nghi_Nhiem') {
+            markers_All[i].setMap(p_objmap);
+        }
+    }
+}
+function Show_Markers_Nguoi_Nghi_Nhiem() {
+    var map = p_map;
+    setMapOnAll_Nguoi_Nghi_Nhiem(map);
+}
 //--------------------------------------------------------------------------------------------
 let markers_Diem_Cach_Ly = [];
 function List_Marker_Address_Diem_Cach_Ly(p_arrAddress_Diem_Cach_Ly) {
     var arr_Diem_Cach_Ly = [];
     for (var i = 0; i < p_arrAddress_Diem_Cach_Ly.length; i++) {
         var item = {
-            position: new google.maps.LatLng(p_arrAddress_Diem_Cach_Ly[i].lat, p_arrAddress_Diem_Cach_Ly[i].lng)
+            position: new google.maps.LatLng(p_arrAddress_Diem_Cach_Ly[i].lat, p_arrAddress_Diem_Cach_Ly[i].lng),
+            icon: "/Icon/Diem_Cach_Ly.png"
         }
         arr_Diem_Cach_Ly.push(item);
     };
@@ -227,6 +219,7 @@ function List_Marker_Address_Diem_Cach_Ly(p_arrAddress_Diem_Cach_Ly) {
         var marker = new google.maps.Marker({
             position: arr_Diem_Cach_Ly[i].position,
             category: 'Diem_Cach_Ly',
+            icon: arr_Diem_Cach_Ly[i].icon,
             map: map,
         });
         markers_Diem_Cach_Ly.push(marker);
@@ -243,4 +236,43 @@ function Hide_Markers_Diem_Cach_Ly() {
 function Show_Markers_Diem_Cach_Ly() {
     var map = p_map;
     setMapOnAll_Diem_Cach_Ly(map);
+}
+//--------------------------------------------------------------------------------------------
+let polygon_Vung_Cach_Ly = [];
+function List_Marker_Address_Vung_Cach_Ly(p_arrTen_Vung_Cach_Ly, p_arrAddress_Vung_Cach_Ly) {
+    var arr_Vung_Cach_Ly = [];
+    var arr_Item_Vung_Cach_Ly = [];
+    for (var i = 0; i < p_arrTen_Vung_Cach_Ly.length; i++) {
+        for (var j = 0; j < p_arrAddress_Vung_Cach_Ly.length; j++) {
+            if (p_arrTen_Vung_Cach_Ly[i]==p_arrAddress_Vung_Cach_Ly[j].ten_Vung) {
+                var item = { lat: parseFloat(p_arrAddress_Vung_Cach_Ly[j].lat), lng: parseFloat(p_arrAddress_Vung_Cach_Ly[j].lng) }
+                arr_Item_Vung_Cach_Ly.push(item);
+            }
+        };
+        arr_Vung_Cach_Ly.push(arr_Item_Vung_Cach_Ly);
+        arr_Item_Vung_Cach_Ly = [];
+    };
+    for (var i = 0; i < arr_Vung_Cach_Ly.length; i++) {
+        var Item_Vung_Cach_Ly = new google.maps.Polygon({
+            paths: arr_Vung_Cach_Ly[i],
+            strokeColor: "#FF0000",
+            strokeOpacity: 0.8,
+            strokeWeight: 3,
+            fillColor: "#FF0000",
+            fillOpacity: 0.35,
+        });
+        polygon_Vung_Cach_Ly.push(Item_Vung_Cach_Ly);
+    };
+}
+function setMapOnAll_Vung_Cach_Ly(p_objmap) {
+    for (var i = 0; i < polygon_Vung_Cach_Ly.length; i++) {
+        polygon_Vung_Cach_Ly[i].setMap(p_objmap);
+    }
+}
+function Hide_Polygon_Vung_Cach_Ly() {
+    setMapOnAll_Vung_Cach_Ly(null);
+}
+function Show_Polygon_Vung_Cach_Ly() {
+    var map = p_map;
+    setMapOnAll_Vung_Cach_Ly(map);
 }
